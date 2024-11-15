@@ -16,9 +16,11 @@ class SomeDataset(Dataset):
 
 
 class SomeDatamodule(DataLoader):
-     """
-    Allows you to sample train/val/test data, to later do training with models.
-        
     """
-    def __init__(self):
-        super().__init__()
+    Allows you to sample train/val/test data, to later do training with models.
+
+    """
+
+
+# def __init__(self):
+# super().__init__()
