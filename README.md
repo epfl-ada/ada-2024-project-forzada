@@ -12,10 +12,6 @@ Title: "Which Cyclic Dependent Kinase (CDK) has the best binding affinity?" (*to
 
 *Proposed additional datasets (if any): List the additional dataset(s) you want to use (if any), and some ideas on how you expect to get, manage, process, and enrich it/them. Show us that you’ve read the docs and some examples, and that you have a clear idea on what to expect.  Discuss data size and format if relevant. It is your responsibility to check that what you propose is feasible.*
 
-* Dataset on ligands amino sequential structure
-
-* pdb viewer on CDKs
-
 
 
 ### Research Questions
