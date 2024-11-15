@@ -1,63 +1,68 @@
 # ada-2024-project-forzada
-ada-2024-project-forzada created by GitHub Classroom
 
-Title: "Which Cyclic Dependent Kinase (CDK) has the best binding affinity?" (*to be edited*)
+## "What makes a good inhibitor against cell proliferation?" 
 
-### Abstract: A 150 word description of the project idea and goals. What’s the motivation behind your project? What story would you like to tell, and why?
-
-*150 words. to be written when the analysis is done*
-
- 
-### Additional dataset
-
-*Proposed additional datasets (if any): List the additional dataset(s) you want to use (if any), and some ideas on how you expect to get, manage, process, and enrich it/them. Show us that you’ve read the docs and some examples, and that you have a clear idea on what to expect.  Discuss data size and format if relevant. It is your responsibility to check that what you propose is feasible.*
+### Abstract:
+Cancer cells can grow quickly in the human body, but what allows them to grow, and more importantly can we inhibit this proliferation from happening? We know that cyclin-dependent kinases (CDKs) drive the cell cycle and can interact with diverse ligands. This project explores how CDKs interact with their ligands, studying their binding affinities, amino acid sequences as well as their ligand's structure. Through the analysis of comparing the CDKs and ligands based on their affinity scores, we confirmed using the Levenshtein distance that some CDKs within the same family have very similar chain1 amino acid sequences. However, for these specific families there was not sufficient data to compare the ligand and CDK pair interaction. Thus, CDKs were joined by their families (UniProt ID) to make meaningful comparisons on ligands structures (SMILES) with the Tanimoto Similarity measure. Ligands with a strong affinitity to multiple CDKs did on average have 15% similar looking molecular structures. 
 
 
+### Research Questions we want to answer
 
-### Research Questions
+- What are the similarities between CDK and ligands?
+     - Does a group of ligands have strong binding affinities across multiple CDKs? This will reveal plausible good inhibitors.
+     - Using a similarity measure such as Tanimoto, how much information are we disregarding by this method? 
+- Are there similarities in the amino acid sequences that explain these similarities between CDKs and ligands?
+- Are these similarities based on patterns in the amino acid sequences or ligand structures?
+- (Future) Can we make a regression model (QSAR) to predict the potential binding affinity between CDK proteins and ligands (or for any random protein).
+- (more to come)
 
-A list of research questions you would like to address during the project.
+In general, the subset containing only CDK's is not sufficient data and we expect to have to expand these method onto multiple target families.
 
-
-1. Are the CDK interactions different depending on their nature (do CDK1 has higher affinities with its ligand than CDK2?) or their ligand (Do CDK1 interact better with its cyclins or with its inhibitors?)?
-2. What characteristics are significant for the binding (patterns in the binding sequences, amino acid sequence on active site)? 
-* Could we find CDK’s common features among the CDK family thanks to these clusters (families of ligands based on amino acid sequence, common ligands)?
-* Conversely, can we say something about the active site of a group of CDK's (potentially only 1) based on which type of ligands that binds well. i.e. all the ligands binding well have a carboxylic acid group or a benzene ring in common.
-* (BONUS) Can we make a regression model (QSAR) to predict the binding affinity between CDK proteins and ligands.  
-
-Could we predict from any random protein its potential affinity with CDK? (we could use QSAR or simply prediction methods???)
-
-
-
+### Proposed additional dataset
+* PDP viewer as a potential additional dataset for P3. *We don't yet use this dataset, because we think it might be a very manual process and maybe too much focusing on a life science approach and not a data analysist approach.*
+  
 ### Methods
+
+**String matching methods**:
+
+To gain insight into the similarities and differences between various CDK amino acid sequences, we will use string-based similarity measures. We plan to use
+- Levenshtein distance measure. Which matches and measures the characters that are different in two given sequences. We can explain this in a confusion matrix of the unique CDKs and gain insight on similar CDKs.
+
+**Pattern matching methods**:
+
+To deepen our analysis we also want to utilize pattern matching methods to explore patterns in the CDK sequences and Ligand structures. 
+- Tanimoto (for the SMILES). We use this for the ligand structures to compare the similarities. 
+- N-grams (not implemented yet). We plan to use this on the CDK sequences to potentially locate the binding site pattern that enables the inhibiting in the CDK-ligand pair. Using n-grams will allow us to look at sequences of characters in the amino acid sequences of the CDKs. We can experiment with different values. 
+
+**Prediction methods**:
+
+- Using the QSAR method based on Tanimoto Similarity Coefficient as a variable (not implemented yet).
+
 
 
 ### Proposed timeline
-#### *How to achieve this (in steps):*
 
-- Preprocess: 
-    - only looking at relevant (47) CDK and their binding ligands (suppose it will be enough data? we can add more data for milestone 3)
-    - Find all unique binding ligands (4500?)
-    - Create four dataframes for each of the measures of binding affinities for CDKs and ligands (will each be of dimension 47x4500?).
-    - Assign labels to the affinity scores for three levels of affinity (Ki_weak, Ki_moderate, Ki_strong, EC50_weak, EC_moderate , ... etc. 12 labels in total) Julie and Mathilde might find a good source to indicate this. We will have to define a good (and fair!) mapping and justify it!
-- Construct dataframe: match unique pairs ligands-CDKs -> make dataframe with the affinity measures and labels as rows
-- Maybe dimensionality reduction: PCA (but we dont have so many parameters so might not make sense)
-- Clustering/grouping: group on similar ligands (from a bioperspective view - how to? database?)
-- Look into the Regression model if time permits.
-
-
+| Phase                   | Description                                      | Duration       |
+|-------------------------|--------------------------------------------------|----------------|
+| **Data Preprocessing**  | Filter, clean, and normalize CDK-ligand data     | Before P2      |
+| **Visualization**       | Create heatmaps for affinity scores              | Before P2      |
+| **Sequence Embedding**  | Encode sequences for similarity measurement      | (Week 1)       |
+| **QSAR Modeling**       | Try to build regression model for affinity prediction   | Weeks 1-3      |
+| **Final Analysis**      | Interpret results                                | Week 4         |
+| **Hand-in**             | Finalize README and datastory                    | Week 5         |
 
 
 
 ### Organization within the team
-
-A list of internal milestones up until project Milestone P3.
-Create a gantt chart. 
-Link it **here**
-
-And then it all makes sense, great job, amazing job, couldn't have done it better 6/6 the world and the universe is saved GG
+Internal milestones for milestone P3: 
+* **[Done]** Data exploration: clean data, handle outliers, normalise, drop redundant information
+* **[Done]** Visualisation: visualise groups of CDK's and ligands to decide which deserve deeper exploration
+* **[Partially done]**: Sequence Embedding: Using the Levenshtein distance and Tanimoto measure to compare the sequences of the CDKs and the ligand structures. We need to extend this to use N-grams so that we can find potential patterns that strongly inhibits binding affinity.
+* Prediction method done if possible.
 
 
 ### Questions for TAs (optional)
 
-Add here any questions you have for us related to the proposed project.
+How much data should we use? We feel we need to upscale and use more of the data, but we limited ourselves to only use the CDKs for this milestone. We think it could be interesting to use all (or at least more) of the data e.g. to cluster based on how targets interact with ligands (we would expect to find the CDK families).
+
+We are unsure of how we should build a prediction model and if this will work.
