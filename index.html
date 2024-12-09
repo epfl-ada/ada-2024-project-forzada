@@ -1,23 +1,20 @@
 ---
-layout: home
-title: My website
-subtitle: This is where I will tell my friends way too much about me
+layout: post
+title: Ligand Binding to Cyclin-Dependent Kinases (CDKs)
+subtitle: Understanding ligand interactions with CDKs for therapeutic applications
+gh-repo: your-repo/beautiful-jekyll
+gh-badge: [star, fork, follow]
+tags: [cdk, ligands, drug-discovery, biology]
+comments: true
 ---
 
-# 🚀 Exploring Ligand Binding to Cyclin-Dependent Kinases (CDKs)
-
-Cyclin-Dependent Kinases (**CDKs**) are a family of protein kinases crucial for regulating the cell cycle. Aberrations in their regulation often result in cancer, making CDKs an attractive target for therapeutic ligands.
+Cyclin-Dependent Kinases (**CDKs**) are pivotal regulators of the cell cycle. Aberrant activity of CDKs is linked to cancer, making them attractive targets for therapeutic ligands. This post explores the science of ligand binding to CDKs and its implications in drug discovery.
 
 ---
 
-## 📚 What are CDKs?
+## What are CDKs?
 
-CDKs are serine/threonine kinases that work with cyclins to control cell cycle progression. These enzymes are essential for the proper timing of cell cycle phases (e.g., G1/S and G2/M transitions).
-
-### **Key Features:**
-- Require cyclins for activation
-- Contain ATP-binding pockets crucial for enzymatic activity
-- Mutated or overexpressed in various cancers
+CDKs are serine/threonine kinases that regulate cell cycle transitions. They require binding to cyclins for activation. Common CDKs include:
 
 | CDK Type | Function | Cyclin Partner |
 |----------|----------|----------------|
@@ -25,32 +22,42 @@ CDKs are serine/threonine kinases that work with cyclins to control cell cycle p
 | CDK2     | DNA synthesis | Cyclin A/E |
 | CDK4/6   | G1 phase progression | Cyclin D |
 
+{: .box-note}
+**Note:** CDK inhibitors are a cornerstone of cancer treatment, with CDK4/6 inhibitors like *Palbociclib* being FDA-approved for breast cancer therapy.
+
 ---
 
-## 🔬 Ligand Binding to CDKs
+## Ligand Binding: Mechanisms
 
-**Why Target CDKs?**
-Small-molecule inhibitors can block ATP or substrate binding, disrupting CDK function and arresting cancer cell growth.
+CDK inhibitors work by blocking ATP or substrate binding. There are two primary mechanisms of ligand binding:
 
-### **Mechanisms of Ligand Binding**
-1. **ATP-Competitive Binding:**
-   Ligands occupy the ATP-binding pocket, inhibiting kinase activity.
-   
-   ![ATP-competitive inhibition](https://via.placeholder.com/800x400?text=Ligand+Binding+Pocket)
+1. **ATP-Competitive Inhibitors**:  
+   These ligands bind to the ATP pocket, directly inhibiting kinase activity.  
 
-2. **Allosteric Inhibition:**
-   Ligands bind to regions outside the active site, altering CDK conformation.
+   ![ATP-Competitive Inhibition](https://via.placeholder.com/800x400?text=Ligand+Binding+Pocket){: .mx-auto.d-block :}
 
-### **Notable CDK Inhibitors**
+2. **Allosteric Inhibitors**:  
+   These ligands bind outside the active site, altering the protein conformation.
+
+---
+
+## Notable CDK Inhibitors
+
+Here's a quick overview of some widely studied CDK inhibitors:
+
 | Inhibitor      | Target CDKs | Therapeutic Use           |
 |----------------|-------------|---------------------------|
-| Palbociclib    | CDK4/6      | Breast Cancer             |
-| Ribociclib     | CDK4/6      | Hormone Receptor-Positive Cancer |
-| Flavopiridol   | Pan-CDK     | Leukemia                 |
+| **Palbociclib**    | CDK4/6      | Breast Cancer             |
+| **Ribociclib**     | CDK4/6      | Hormone Receptor-Positive Cancer |
+| **Flavopiridol**   | Pan-CDK     | Leukemia                 |
 
 ---
 
-## 🧬 Molecular Docking Studies
+## Visualizing Ligand Docking
 
-**Docking simulations** help predict how ligands interact with CDKs at the molecular level. The following visualization shows an ATP-competitive ligand bound to CDK2:
+Molecular docking simulations provide insights into ligand binding. Here's a Python code snippet to visualize CDK-ligand interactions:
 
+```python
+from biopandas.pdb import PandasPdb
+ppdb = PandasPdb().read_pdb('cdk2-ligand-complex.pdb')
+ppdb.df['ATOM'].head()
