@@ -1,63 +1,181 @@
 ---
-layout: post
-title: Ligand Binding to Cyclin-Dependent Kinases (CDKs)
-subtitle: Understanding ligand interactions with CDKs for therapeutic applications
-gh-repo: your-repo/beautiful-jekyll
-gh-badge: [star, fork, follow]
-tags: [cdk, ligands, drug-discovery, biology]
-comments: true
+layout: home
+title: My website
+subtitle: This is where I will tell my friends way too much about me
 ---
 
-Cyclin-Dependent Kinases (**CDKs**) are pivotal regulators of the cell cycle. Aberrant activity of CDKs is linked to cancer, making them attractive targets for therapeutic ligands. This post explores the science of ligand binding to CDKs and its implications in drug discovery.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ligand Binding to Cyclin-Dependent Kinases (CDKs)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .box-note {
+            background-color: #e7f5ff;
+            border-left: 5px solid #2196F3;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .box-warning {
+            background-color: #fff4e5;
+            border-left: 5px solid #FF9800;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .box-error {
+            background-color: #ffebee;
+            border-left: 5px solid #F44336;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ligand Binding to Cyclin-Dependent Kinases (CDKs)</h1>
+        <p><strong>Subtitle:</strong> Understanding ligand interactions with CDKs for therapeutic applications</p>
+    </header>
+    
+    <section>
+        <h2>What are CDKs?</h2>
+        <p>Cyclin-Dependent Kinases (CDKs) are pivotal regulators of the cell cycle. Aberrant activity of CDKs is linked to cancer, making them attractive targets for therapeutic ligands. CDKs require binding to cyclins for activation. Common CDKs include:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>CDK Type</th>
+                    <th>Function</th>
+                    <th>Cyclin Partner</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CDK1</td>
+                    <td>Entry into mitosis</td>
+                    <td>Cyclin B</td>
+                </tr>
+                <tr>
+                    <td>CDK2</td>
+                    <td>DNA synthesis</td>
+                    <td>Cyclin A/E</td>
+                </tr>
+                <tr>
+                    <td>CDK4/6</td>
+                    <td>G1 phase progression</td>
+                    <td>Cyclin D</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="box-note">
+            <strong>Note:</strong> CDK inhibitors are a cornerstone of cancer treatment, with CDK4/6 inhibitors like <em>Palbociclib</em> being FDA-approved for breast cancer therapy.
+        </div>
+    </section>
+    
+    <section>
+        <h2>Ligand Binding: Mechanisms</h2>
+        <p>CDK inhibitors work by blocking ATP or substrate binding. There are two primary mechanisms of ligand binding:</p>
+        <ul>
+            <li><strong>ATP-Competitive Inhibitors:</strong> These ligands bind to the ATP pocket, directly inhibiting kinase activity.</li>
+            <li><strong>Allosteric Inhibitors:</strong> These ligands bind outside the active site, altering the protein conformation.</li>
+        </ul>
+        
+        <img src="https://via.placeholder.com/800x400?text=Ligand+Binding+Pocket" alt="ATP-Competitive Inhibition">
+    </section>
+    
+    <section>
+        <h2>Notable CDK Inhibitors</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Inhibitor</th>
+                    <th>Target CDKs</th>
+                    <th>Therapeutic Use</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Palbociclib</td>
+                    <td>CDK4/6</td>
+                    <td>Breast Cancer</td>
+                </tr>
+                <tr>
+                    <td>Ribociclib</td>
+                    <td>CDK4/6</td>
+                    <td>Hormone Receptor-Positive Cancer</td>
+                </tr>
+                <tr>
+                    <td>Flavopiridol</td>
+                    <td>Pan-CDK</td>
+                    <td>Leukemia</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <section>
+        <h2>Experimental Techniques</h2>
+        <h3>Techniques for Studying CDK-Ligand Binding:</h3>
+        <ul>
+            <li><strong>SPR (Surface Plasmon Resonance):</strong> Measures ligand binding kinetics.</li>
+            <li><strong>X-ray Crystallography:</strong> Resolves atomic-level interactions.</li>
+            <li><strong>Cellular Assays:</strong> Tests the biological impact of inhibitors on cells.</li>
+        </ul>
+        
+        <div class="box-warning">
+            <strong>Warning:</strong> Selectivity remains a challenge. Designing inhibitors that target specific CDKs without off-target effects requires further research.
+        </div>
+    </section>
+    
+    <section>
+        <h2>Applications of CDK Inhibition</h2>
+        <p>CDK inhibition has two major applications:</p>
+        <ol>
+            <li><strong>Cancer Therapy:</strong> Selective inhibitors of CDK4/6, such as Palbociclib, are combined with hormonal therapies for advanced breast cancer.</li>
+            <li><strong>Other Diseases:</strong> Emerging research indicates potential for treating neurodegenerative disorders and viral infections.</li>
+        </ol>
+    </section>
+    
+    <section>
+        <h2>References and Further Reading</h2>
+        <ul>
+            <li>Johnson, N., & Smith, A. (2023). <em>Cyclin-dependent kinase inhibitors in cancer therapy.</em> Nature Reviews Drug Discovery.</li>
+            <li>Zhang, X., et al. (2022). <em>ATP-competitive inhibitors targeting CDKs.</em> Journal of Medicinal Chemistry.</li>
+        </ul>
+        <p>Additional resources: <a href="https://www.ebi.ac.uk/chembl/" target="_blank">ChEMBL</a>, <a href="https://www.rcsb.org/" target="_blank">Protein Data Bank (PDB)</a></p>
+    </section>
+    
+    <footer>
+        <p><em>Author: Your Name | Date: 2024</em></p>
+    </footer>
+</body>
+</html>
 
----
-
-## What are CDKs?
-
-CDKs are serine/threonine kinases that regulate cell cycle transitions. They require binding to cyclins for activation. Common CDKs include:
-
-| CDK Type | Function | Cyclin Partner |
-|----------|----------|----------------|
-| CDK1     | Entry into mitosis | Cyclin B |
-| CDK2     | DNA synthesis | Cyclin A/E |
-| CDK4/6   | G1 phase progression | Cyclin D |
-
-{: .box-note}
-**Note:** CDK inhibitors are a cornerstone of cancer treatment, with CDK4/6 inhibitors like *Palbociclib* being FDA-approved for breast cancer therapy.
-
----
-
-## Ligand Binding: Mechanisms
-
-CDK inhibitors work by blocking ATP or substrate binding. There are two primary mechanisms of ligand binding:
-
-1. **ATP-Competitive Inhibitors**:  
-   These ligands bind to the ATP pocket, directly inhibiting kinase activity.  
-
-   ![ATP-Competitive Inhibition](https://via.placeholder.com/800x400?text=Ligand+Binding+Pocket){: .mx-auto.d-block :}
-
-2. **Allosteric Inhibitors**:  
-   These ligands bind outside the active site, altering the protein conformation.
-
----
-
-## Notable CDK Inhibitors
-
-Here's a quick overview of some widely studied CDK inhibitors:
-
-| Inhibitor      | Target CDKs | Therapeutic Use           |
-|----------------|-------------|---------------------------|
-| **Palbociclib**    | CDK4/6      | Breast Cancer             |
-| **Ribociclib**     | CDK4/6      | Hormone Receptor-Positive Cancer |
-| **Flavopiridol**   | Pan-CDK     | Leukemia                 |
-
----
-
-## Visualizing Ligand Docking
-
-Molecular docking simulations provide insights into ligand binding. Here's a Python code snippet to visualize CDK-ligand interactions:
-
-```python
-from biopandas.pdb import PandasPdb
-ppdb = PandasPdb().read_pdb('cdk2-ligand-complex.pdb')
-ppdb.df['ATOM'].head()
