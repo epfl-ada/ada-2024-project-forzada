@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn.model_selection import train_test_split
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 
@@ -9,8 +10,11 @@ from sklearn.feature_selection import VarianceThreshold
 from sklearn.preprocessing import StandardScaler
 
 
-feature_select = VarianceThreshold(threshold=0.05)
-scaler = StandardScaler()
+feature_select_cdk = VarianceThreshold(threshold=0.05)
+scaler_cdk = StandardScaler()
+
+feature_select_rand = VarianceThreshold(threshold=0.05)
+scaler_rand = StandardScaler()
 
 
 def mol2fp(mol):
@@ -49,7 +53,9 @@ def preprocess_df(df: pd.DataFrame, cdks: list[str], col="Target Name") -> pd.Da
     return df
 
 
-def make_features_and_target(df: pd.DataFrame):
+def make_features_and_target(
+    df: pd.DataFrame, scaler=scaler_cdk, feature_select=feature_select_cdk
+) -> tuple:
     """Takes a dataframe with fingerprints and log values of IC50 and returns a tuple of features and target for test and train set
 
     Args:
@@ -58,8 +64,6 @@ def make_features_and_target(df: pd.DataFrame):
     Returns:
         test / train features and target
     """
-    from sklearn.linear_model import LinearRegression
-    from sklearn.model_selection import train_test_split
 
     # Splitting the data
     X = np.stack(df["Fingerprint"].values)
@@ -79,7 +83,7 @@ def make_features_and_target(df: pd.DataFrame):
     X_train = sm.add_constant(X_train)
     X_test = sm.add_constant(X_test)
 
-    return X_train, X_test, y_train, y_test, scaler
+    return X_train, X_test, y_train, y_test
 
 
 def train_model(X_train, y_train):
@@ -89,18 +93,6 @@ def train_model(X_train, y_train):
     print(res.summary())
 
     return res
-
-
-def train_model_sklearn(X_train, y_train):
-    from sklearn.linear_model import LinearRegression
-
-    model = LinearRegression()
-    model.fit(X_train, y_train)
-    return model
-
-
-def predict_log_affinity(model, fingerprint):
-    return model.predict(fingerprint)
 
 
 def plot_evaluation_of_model(model, X_test, y_test):
@@ -142,7 +134,9 @@ def create_me_a_model(df: pd.DataFrame, cdks: list[str]):
     return model
 
 
-def predict_log_affinity(model, scaler, fingerprint: str):
+def predict_log_affinity(
+    model, fingerprint, scaler=scaler_cdk, feature_select=feature_select_cdk
+):
 
     # We need to preprocess the fingerprint
     mol = Chem.MolFromSmiles(fingerprint)
@@ -162,6 +156,45 @@ def predict_log_affinity(model, scaler, fingerprint: str):
     return model.predict(row_scaled)
 
 
+####################################
+####################################
+####################################
+####################################
+###### FUNCTIONS FOR TESTING #######
+###### FUNCTIONS FOR TESTING #######
+###### FUNCTIONS FOR TESTING #######
+###### FUNCTIONS FOR TESTING #######
+###### FUNCTIONS FOR TESTING #######
+###### FUNCTIONS FOR TESTING #######
+###### FUNCTIONS FOR TESTING #######
+####################################
+####################################
+####################################
+####################################
+
+
+def construct_random_IC50_df(df: pd.DataFrame, cdks) -> pd.DataFrame:
+
+    # Give new random IC50 values to the dataframe in the range of 1-100000 with a long tail towards the higher values
+    df["IC50 (nM)"] = np.random.exponential(10000, len(df))
+
+    df = preprocess_df(df, cdks)
+
+    return df
+
+
+def comparison_2_models(model1, random_model):
+    print(f"model based on desired cdk: {model1.summary()}")
+    print(
+        f"model based on random IC50 values for the same selected cdk: {random_model.summary()}"
+    )
+
+    print(f"R2 for model based on desired cdk: {model1.rsquared}")
+    print(
+        f"R2 for model based on random IC50 values for the same selected cdk: {random_model.rsquared}"
+    )
+
+
 if __name__ == "__main__":
     # Testing the function
     df = pd.read_csv("data/IC50_df.csv")
@@ -171,33 +204,47 @@ if __name__ == "__main__":
     ]
     df_filtered = preprocess_df(df, cdks)
 
-    X_train, X_test, y_train, y_test, scaler = make_features_and_target(df_filtered)
+    X_train, X_test, y_train, y_test = make_features_and_target(df_filtered)
 
     model = train_model(X_train, y_train)
 
-    # plot_evaluation_of_model(model, X_test, y_test)
+    plot_evaluation_of_model(model, X_test, y_test)
 
     print_model_summary(model)
 
     # Testing the prediction
     # An arbitrary smiles string
     smiles = "COc1cc(CS(C)(=O)=NC#N)cc(Nc2ncc(F)c(n2)-c2ccc(F)cc2OC)c1"
-    predicted_log_val = predict_log_affinity(model, scaler, smiles)
+    predicted_log_val = predict_log_affinity(model, smiles)
     print(f"Predicted IC50 log value for {smiles}: {predicted_log_val}")
     pred_val = np.exp(predicted_log_val)
     print(f"Predicted IC50 value for {smiles}: {pred_val}")
 
     aspirin_smiles = "CC(=O)OC1=CC=CC=C1C(=O)O"
-    aspirin_pred = predict_log_affinity(model, scaler, aspirin_smiles)
+    aspirin_pred = predict_log_affinity(model, aspirin_smiles)
     print(f"Predicted IC50 log value for {aspirin_smiles}: {aspirin_pred}")
     aspirin_val = np.exp(aspirin_pred)
     print(f"Predicted IC50 value for {aspirin_smiles}: {aspirin_val}")
     print("Done")
 
     ethanol_smiles = "CCO"
-    ethanol_pred = predict_log_affinity(model, scaler, ethanol_smiles)
+    ethanol_pred = predict_log_affinity(model, ethanol_smiles)
     print(f"Predicted IC50 log value for {ethanol_smiles}: {ethanol_pred}")
     ethanol_val = np.exp(ethanol_pred)
     print(f"Predicted IC50 value for {ethanol_smiles}: {ethanol_val}")
 
     print("Done")
+
+    # rand_df = construct_random_IC50_df(df, cdks)
+    # X_train_rand, X_test_rand, y_train_rand, y_test_rand = make_features_and_target(
+    #     rand_df, scaler=scaler_rand, feature_select=feature_select_rand
+    # )
+    # andom_model = train_model(X_train_rand, y_train_rand)
+
+    # comparison_2_models(model, random_model)
+
+    # # Testing the prediction on the random model on the same smiles
+    # aspirin_log_val_rand = predict_log_affinity(random_model, aspirin_smiles, scaler=scaler_rand, feature_select=feature_select_rand)
+    # print(f"Predicted IC50 log value for {smiles} with random model: {predicted_log_val_rand}")
+    # pred_val_rand = np.exp(predicted_log_val_rand)
+    # print(f"Predicted IC50 value for {smiles} with random model: {pred_val_rand}")
