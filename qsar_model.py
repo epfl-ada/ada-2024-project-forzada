@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn.decomposition import PCA
 from sklearn.model_selection import train_test_split
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
@@ -12,6 +13,7 @@ from sklearn.preprocessing import StandardScaler
 
 feature_select_cdk = VarianceThreshold(threshold=0.05)
 scaler_cdk = StandardScaler()
+pca_cdk = PCA()  # 0.80 variance - tested with make_features_and_target_PCA
 
 feature_select_rand = VarianceThreshold(threshold=0.05)
 scaler_rand = StandardScaler()
@@ -84,6 +86,52 @@ def make_features_and_target(
     X_test = sm.add_constant(X_test)
 
     return X_train, X_test, y_train, y_test
+
+
+### PCA for feature selection ###
+### PCA for feature selection ###
+
+
+def make_features_and_target_PCA(
+    df: pd.DataFrame, scaler=scaler_cdk, feature_select=feature_select_cdk, pca=pca_cdk
+) -> tuple:
+
+    # Figure out how many components to keep 0.80 variance
+    X = np.stack(df["Fingerprint"].values)
+    y = df["log_IC50"].values
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
+
+    X_train = feature_select.fit_transform(X_train)
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_train_pca = pca.fit_transform(X_train_scaled)
+
+    X_test = feature_select.transform(X_test)
+    X_test_scaled = scaler.transform(X_test)
+    X_test_pca = pca.transform(X_test_scaled)
+
+    # var_ratio = []
+    # nums = np.arange(1, X_train.shape[1])
+    # for num in nums:
+    #     pca = PCA(n_components=num)
+    #     pca.fit(X_train_scaled)
+    #     var_ratio.append(np.sum(pca.explained_variance_ratio_))
+
+    # plt.figure(figsize=(4, 2), dpi=150)
+    # plt.grid()
+    # plt.plot(nums, var_ratio, marker="o")
+    # plt.xlabel("n_components")
+    # plt.ylabel("Explained variance ratio")
+    # plt.title("n_components vs. Explained Variance Ratio")
+    # plt.show()
+
+    return X_train_pca, X_test_pca, y_train, y_test
+
+
+### PCA for feature selection ###
+### PCA for feature selection ###
 
 
 def train_model(X_train, y_train):
@@ -208,7 +256,7 @@ if __name__ == "__main__":
 
     model = train_model(X_train, y_train)
 
-    plot_evaluation_of_model(model, X_test, y_test)
+    # plot_evaluation_of_model(model, X_test, y_test)
 
     print_model_summary(model)
 
@@ -248,3 +296,11 @@ if __name__ == "__main__":
     # print(f"Predicted IC50 log value for {smiles} with random model: {predicted_log_val_rand}")
     # pred_val_rand = np.exp(predicted_log_val_rand)
     # print(f"Predicted IC50 value for {smiles} with random model: {pred_val_rand}")
+
+    # make_features_and_target_PCA(
+    #     df_filtered, scaler=scaler_cdk, feature_select=feature_select_cdk
+    # )
+
+    X_train_pca, X_test_pca, y_train, y_test = make_features_and_target_PCA(df_filtered)
+    model_pca = train_model(X_train_pca, y_train)
+    print_model_summary(model_pca)
