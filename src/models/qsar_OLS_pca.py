@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 # Define reusable preprocessing tools
-#feature_selector = VarianceThreshold(threshold=0.05)
+feature_selector = VarianceThreshold(threshold=0.05)
 scaler_cdk = StandardScaler()
 pca = PCA(n_components=0.75)
 
@@ -54,9 +54,37 @@ def preprocess_df(df: pd.DataFrame, cdks: list[str], col="Target Name") -> pd.Da
 
     return df
 
-def make_features_and_target(df: pd.DataFrame, scaler=scaler_cdk, use_pca=False) -> tuple:
+def make_features_and_target_PCA(df: pd.DataFrame, scaler=scaler_cdk) -> tuple:
     """
-    Generates train/test features and target arrays, with optional PCA for dimensionality reduction.
+    Generates train/test features and target arrays, with PCA for dimensionality reduction.
+    Args:
+        df (pd.DataFrame): Preprocessed containing the fingerprints
+
+    Returns:
+        X_train, X_test, y_train, y_test
+    """
+    # Splitting the data
+    X = np.stack(df["Fingerprint"].values)
+    y = df["log_IC50"].values
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # Applying PCA
+    X_train = pca.fit_transform(X_train)
+    X_test = pca.transform(X_test)
+
+    # Scaling the data
+    X_train = scaler_cdk.fit_transform(X_train)
+    X_test = scaler_cdk.transform(X_test)
+
+    # Adding constant term for OLS
+    X_train = sm.add_constant(X_train)
+    X_test = sm.add_constant(X_test)
+
+    return X_train, X_test, y_train, y_test
+
+def make_features_and_target_var(df: pd.DataFrame, scaler=scaler_cdk) -> tuple:
+    """
+    Generates train/test features and target arrays, using variance threshold for dimensionality reduction.
     Args:
         df (pd.DataFrame): Preprocessed containing the fingerprints
 
@@ -69,17 +97,12 @@ def make_features_and_target(df: pd.DataFrame, scaler=scaler_cdk, use_pca=False)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     # Feature selection
-    # X_train = feature_selector.fit_transform(X_train)
-    # X_test = feature_selector.transform(X_test)
+    X_train = feature_selector.fit_transform(X_train)
+    X_test = feature_selector.transform(X_test)
 
     # Scaling the data
     X_train = scaler_cdk.fit_transform(X_train)
     X_test = scaler_cdk.transform(X_test)
-
-    # Applying PCA
-    if use_pca:
-        X_train = pca.fit_transform(X_train)
-        X_test = pca.transform(X_test)
 
     # Adding constant term for OLS
     X_train = sm.add_constant(X_train)
@@ -90,6 +113,7 @@ def make_features_and_target(df: pd.DataFrame, scaler=scaler_cdk, use_pca=False)
 def plot_variance_explained(X):
     """
     Plots the cumulative variance explained by PCA components.
+    Use if PCA was used during training.
     """
     X_scaled = scaler_cdk.fit_transform(X)
     pca_full = PCA().fit(X_scaled)
@@ -139,9 +163,10 @@ def plot_model_evaluation(model, X_test, y_test):
     plt.tight_layout()
     plt.show()
 
-def predict_log_affinity(model, smiles: str, scaler=scaler_cdk, use_pca=False):
+def predict_log_affinity(model, smiles: str, scaler=scaler_cdk, var_thres=False):
     """
     Predicts log(IC50) for a given SMILES string.
+    Specify whether to use PCA or Variance Threshold.
 
     Args:
         model: Trained OLS model.
@@ -157,13 +182,13 @@ def predict_log_affinity(model, smiles: str, scaler=scaler_cdk, use_pca=False):
     fingerprint = mol2fp(mol).reshape(1, -1)
 
     # Apply preprocessing steps as in training data
-    #fingerprint = feature_selector.transform(fingerprint)
+    # either use PCA or Variance Threshold
+    if var_thres:
+        fingerprint = feature_selector.transform(fingerprint)
+    else:
+        fingerprint = pca.transform(fingerprint)
     fingerprint = scaler.transform(fingerprint)
 
-    # Apply PCA only if it was used during training
-    if use_pca:
-        fingerprint = pca.transform(fingerprint)
-    
     # Explicitly add the constant term to the fingerprint
     fingerprint_with_const = np.hstack([np.ones((fingerprint.shape[0], 1)), fingerprint])
 
@@ -181,7 +206,7 @@ def predict_log_affinity(model, smiles: str, scaler=scaler_cdk, use_pca=False):
 
 if __name__ == "__main__":
     # Load data and choose CDKs
-    df = pd.read_csv("data/IC50_df.csv")
+    df = pd.read_csv("../../data/IC50_df.csv")
     cdks = ["Cyclin-dependent kinase 2", "Cyclin-A2/Cyclin-dependent kinase 2"]
 
     # Preprocessing
@@ -198,7 +223,7 @@ if __name__ == "__main__":
     plot_variance_explained(fingerprints)
 
     # Feature engineering with PCA
-    X_train, X_test, y_train, y_test = make_features_and_target(df_preprocessed, use_pca=True)
+    X_train, X_test, y_train, y_test = make_features_and_target_PCA(df_preprocessed)
     print(f"Number of features after PCA: {X_train.shape[1] - 1}")  # Subtract 1 for the constant term
 
     # Model training
@@ -210,6 +235,6 @@ if __name__ == "__main__":
 
     # Prediction example
     test_smiles = "CC(=O)OC1=CC=CC=C1C(=O)O"  # Aspirin
-    log_ic50 = predict_log_affinity(model, test_smiles, use_pca=True)
+    log_ic50 = predict_log_affinity(model, test_smiles, var_thres=False)
     print(f"Predicted log(IC50): {log_ic50[0]}")
     print(f"Predicted IC50 (nM): {np.exp(log_ic50[0])}")
