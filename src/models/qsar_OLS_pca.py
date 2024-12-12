@@ -9,7 +9,7 @@ from sklearn.decomposition import PCA
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from helper_functions_qsar import *
+from src.models.helper_functions_qsar import *
 
 # Define reusable preprocessing tools
 scaler_cdk = StandardScaler()
@@ -211,7 +211,7 @@ def compare_cdkmodel_and_shuffled(model, y_train, X_train, y_test, X_test):
 
 if __name__ == "__main__":
     # Load data and choose CDKs
-    df = pd.read_csv("../../data/IC50_df.csv")
+    df = pd.read_csv("src\data\IC50_df.csv")
     cdks = ["Cyclin-A2/Cyclin-dependent kinase 2"]
 
     # Feature engineering with PCA
