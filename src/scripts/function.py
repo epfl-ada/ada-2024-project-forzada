@@ -21,6 +21,103 @@ def clean(binding_value, pattern=['<', '>']):
         binding_value = None
     return (binding_value)
 
+def clean_target_name(row):
+    if row['Target Name'] == 'Cyclin-dependent kinase/G2/mitotic-specific cyclin- 1':
+        return 'CDK1-G2/M-Cyc1'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 2':
+        return 'CDK2'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 1':
+        return 'CDK1'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 1/G2/mitotic-specific cyclin-B':
+        return 'CDK1-G2/M-CycB'
+    elif row['Target Name'] == 'Cyclin-A2 [171-432]/Cyclin-dependent kinase 2':
+        return 'CDK2-CycA2[171-432]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 4/G1/S-specific cyclin-D1':
+        return 'CDK4-G1/S-CycD1'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 2/G1/S-specific cyclin-E1':
+        return 'CDK2-G1/S-CycE1'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 4/G1/S-specific cyclin-D1 [L188C]':
+        return 'CDK4-G1/S-CycD1[L188C]'
+    elif row['Target Name'] == 'Cyclin-A2/Cyclin-dependent kinase 2':
+        return 'CDK2-CycA2'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 6/G1/S-specific cyclin-D1 [L188C]':
+        return 'CDK6-G1/S-CycD1[L188C]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 5 activator 1 [99-307]':
+        return 'CDK5-Act1[99-307]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 5 activator 1':
+        return 'CDK5-Act1'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 4':
+        return 'CDK4'
+    elif row['Target Name'] == 'Cyclin-H/Cyclin-dependent kinase 7':
+        return 'CDK7-CycH'
+    elif row['Target Name'] == 'Cyclin-T1/Cyclin-dependent kinase 9':
+        return 'CDK9-CycT1'
+    elif row['Target Name'] == 'Cyclin-A2 [171-432]/Cyclin-dependent kinase 2 [K89T]':
+        return 'CDK2[K89T]-CycA2[171-432]'
+    elif row['Target Name'] == 'Cyclin-A2 [171-432]/Cyclin-dependent kinase 2 [L83V,H84D]':
+        return 'CDK2[L83V,H84D]-CycA2[171-432]'
+    elif row['Target Name'] == 'Cyclin-A2 [171-432]/Cyclin-dependent kinase 2 [F82H]':
+        return 'CDK2[F82H]-CycA2[171-432]'
+    elif row['Target Name'] == 'Cyclin-A2 [171-432]/Cyclin-dependent kinase 2 [F82H,L83V,H84D]':
+        return 'CDK2[F82H,L83V,H84D]-CycA2[171-432]'
+    elif row['Target Name'] == 'Cyclin-A2/Cyclin-dependent kinase 1':
+        return 'CDK1-CycA2'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 11B':
+        return 'CDK11B'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 11A':
+        return 'CDK11A'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 19':
+        return 'CDK19'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 7':
+        return 'CDK7'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 8':
+        return 'CDK8'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 9':
+        return 'CDK9'
+    elif row['Target Name'] == 'Cyclin-A2 [177-432]/Cyclin-dependent kinase 2':
+        return 'CDK2-CycA2[177-432]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 3':
+        return 'CDK3'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 5':
+        return 'CDK5'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 16':
+        return 'CDK16'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 17':
+        return 'CDK17'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 18 [3-474]':
+        return 'CDK18[3-474]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 14':
+        return 'CDK14'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 6/G1/S-specific cyclin-D3':
+        return 'CDK6-G1/S-CycD3'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 3/G1/S-specific cyclin-E1':
+        return 'CDK3-G1/S-CycE1'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 6':
+        return 'CDK6'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [C118L]':
+        return 'CDK2[C118L]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [A144C]':
+        return 'CDK2[A144C]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [C118L,A144C]':
+        return 'CDK2[C118L,A144C]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [F80T]':
+        return 'CDK2[F80T]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [F80M]':
+        return 'CDK2[F80M]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [C118I]':
+        return 'CDK2[C118I]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [A144G]':
+        return 'CDK2[A144G]'
+    elif row['Target Name'] == 'Cyclin-dependent kinase-like 2':
+        return 'CDKlike2'
+    elif row['Target Name'] == 'Cyclin-dependent kinase 2/G1/S-specific cyclin-E1/Glutathione S-transferase P':
+        return 'CDK2-G1/S-CycE1-GSTP'
+    elif row['Target Name'] == 'Cyclin-A1/Cyclin-dependent kinase 2':
+        return 'CDK2-CycA1'
+    elif row['Target Name'] == 'Cyclin-A2 [171-432]/Cyclin-dependent kinase 2 [F82H,L83V,H84D,K98T]':
+        return 'CDK2[F82H,L83V,H84D,K98T]-CycA2[171-432]'
+    else:
+        return row['Target Name']
 
 # Classify the IC50 values 
 def classify_IC50(value):
@@ -93,7 +190,7 @@ def plot_cdk_confusion_matrix_non_normalized(df, sequence_column="BindingDB Targ
 
     return distance_matrix
 
-def plot_cdk_confusion_matrix_normalized(df, sequence_column="BindingDB Target Chain Sequence", label_column="Target Name", plot=True):
+def plot_cdk_confusion_matrix_normalized(df, sequence_column="BindingDB Target Chain Sequence", label_column="Cleaned Target Name", plot=True):
     """
     Generates a confusion matrix plot of normalized Levenshtein distances for unique CDK sequences based on unique target names.
     
