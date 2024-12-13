@@ -26,9 +26,9 @@ pca = PCA(n_components=0.95)
 
 def create_model(df: pd.DataFrame, cdk):
     df = preprocess_df(df, cdk)
-    X_train, X_test, y_train, y_test = make_features_and_target_PCA(df)
+    X_train, X_test, y_train, y_test, scaler, pca = make_features_and_target_PCA(df)
     model = train_model(X_train, y_train)
-    return model, X_train, X_test, y_train, y_test
+    return model, X_train, X_test, y_train, y_test, scaler, pca
 
 
 def plot_variance_explained(X):
@@ -58,7 +58,7 @@ def print_model_summary(model, model_summary=False):
     print("RMSE: ", np.sqrt(model.mse_resid))
 
 
-def predict_log_affinity(model, smiles: str, scaler=scaler_cdk, var_thres=False):
+def predict_log_affinity(model, smiles: str, scaler=scaler_cdk, pca=pca):
     """
     Predicts log(IC50) for a given SMILES string.
     Specify whether to use PCA or Variance Threshold.
@@ -76,27 +76,18 @@ def predict_log_affinity(model, smiles: str, scaler=scaler_cdk, var_thres=False)
         raise ValueError("Invalid SMILES string.")
     fingerprint = mol2fp(mol).reshape(1, -1)
 
-    # Apply preprocessing steps as in training data
-    # either use PCA or Variance Threshold
-    if var_thres:
-        fingerprint = feature_selector.transform(fingerprint)
-    else:
-        fingerprint = pca.transform(fingerprint)
-    fingerprint = scaler.transform(fingerprint)
-
-    # Explicitly add the constant term to the fingerprint
-    fingerprint_with_const = np.hstack(
-        [np.ones((fingerprint.shape[0], 1)), fingerprint]
-    )
+    fp_pca = pca.transform(fingerprint)
+    fp_scaled = scaler.transform(fp_pca)
+    fp_with_const = np.insert(fp_scaled, 0, 1, axis=1)
 
     # Ensure the dimensions match the model
-    if fingerprint_with_const.shape[1] != len(model.params):
+    if fp_with_const.shape[1] != len(model.params):
         raise ValueError(
             f"Feature dimension mismatch: model expects {len(model.params)}, got {fingerprint_with_const.shape[1]}."
         )
 
     # Make prediction
-    return model.predict(fingerprint_with_const)
+    return model.predict(fp_with_const)
 
 
 def compare_cdkmodel_and_shuffled(model, y_train, X_train, y_test, X_test):
@@ -211,12 +202,12 @@ def compare_cdkmodel_and_shuffled(model, y_train, X_train, y_test, X_test):
 
 if __name__ == "__main__":
     # Load data and choose CDKs
-    df = pd.read_csv("src\data\IC50_df.csv")
+    df = pd.read_csv("../data/IC50_df.csv")
     cdks = ["Cyclin-A2/Cyclin-dependent kinase 2"]
 
     # Feature engineering with PCA
 
-    model, X_train, X_test, y_train, y_test = create_model(df, cdks)
+    model, X_train, X_test, y_train, y_test, scaler, pca = create_model(df, cdks)
 
     print(
         f"Number of features after PCA: {X_train.shape[1] - 1}"
@@ -237,4 +228,13 @@ if __name__ == "__main__":
     # print(f"Predicted log(IC50): {log_ic50[0]}")
     # print(f"Predicted IC50 (nM): {np.exp(log_ic50[0])}")
 
-    compare_cdkmodel_and_shuffled(model, y_train, X_train, y_test, X_test)
+    # compare_cdkmodel_and_shuffled(model, y_train, X_train, y_test, X_test)
+    pred = predict_log_affinity(
+        model,
+        "CC(=O)OC1=CC=CC=C1C(=O)O",
+        scaler=scaler,
+        pca=pca,
+    )
+
+    print("BIG FAT COCK")
+    print(f"prediction of smiles molecule is: {pred}")

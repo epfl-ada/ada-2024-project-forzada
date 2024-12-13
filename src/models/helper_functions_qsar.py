@@ -119,20 +119,22 @@ def plot_model_evaluation(model, X_test, y_test):
     plt.show()
 
 
-def make_features_and_target_PCA(df: pd.DataFrame, scaler=scaler_cdk) -> tuple:
+def make_features_and_target_PCA(
+    df: pd.DataFrame, scaler=scaler_cdk, state=42
+) -> tuple:
     """
     Generates train/test features and target arrays, with PCA for dimensionality reduction.
     Args:
         df (pd.DataFrame): Preprocessed containing the fingerprints
 
     Returns:
-        X_train, X_test, y_train, y_test
+        X_train, X_test, y_train, y_test, scaler, pca
     """
     # Splitting the data
     X = np.stack(df["Fingerprint"].values)
     y = df["log_IC50"].values
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
+        X, y, test_size=0.2, random_state=state
     )
 
     # Applying PCA
@@ -147,4 +149,4 @@ def make_features_and_target_PCA(df: pd.DataFrame, scaler=scaler_cdk) -> tuple:
     X_train = sm.add_constant(X_train)
     X_test = sm.add_constant(X_test)
 
-    return X_train, X_test, y_train, y_test
+    return X_train, X_test, y_train, y_test, scaler, pca
