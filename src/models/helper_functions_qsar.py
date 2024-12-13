@@ -41,11 +41,11 @@ def preprocess_df(df: pd.DataFrame, cdks: list[str], col="Target Name") -> pd.Da
         pd.DataFrame: A Dataframe with added fingerprint for each smiles.
     """
 
-    # Filtering the df to only contain rows with desired CDKs
-    df = df[df[col].isin(cdks)]
+    # Filter the DataFrame to only contain rows with desired CDKs and create an explicit copy
+    df = df[df[col].isin(cdks)].copy()
 
     # Adding log values of IC50 and dropping rows with NaN values
-    df["log_IC50"] = np.log(df["IC50 (nM)"].values)
+    df.loc[:, "log_IC50"] = np.log(df["IC50 (nM)"].values)
     df = df.dropna(subset=["log_IC50"])
     # Resetting index
     df = df.reset_index(drop=True)

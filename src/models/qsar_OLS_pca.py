@@ -6,7 +6,6 @@ import seaborn as sns
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem, PandasTools
 from sklearn.decomposition import PCA
-from sklearn.feature_selection import VarianceThreshold
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from src.models.helper_functions_qsar import *
@@ -24,9 +23,9 @@ pca = PCA(n_components=0.95)
 # TODO: set PCA as default in helper function to create features and target arrays
 
 
-def create_model(df: pd.DataFrame, cdk):
+def create_model(df: pd.DataFrame, cdk, random_state = 42):
     df = preprocess_df(df, cdk)
-    X_train, X_test, y_train, y_test, scaler, pca = make_features_and_target_PCA(df)
+    X_train, X_test, y_train, y_test, scaler, pca = make_features_and_target_PCA(df, state = random_state)
     model = train_model(X_train, y_train)
     return model, X_train, X_test, y_train, y_test, scaler, pca
 
@@ -57,6 +56,33 @@ def print_model_summary(model, model_summary=False):
     print("MSE: ", model.mse_resid)
     print("RMSE: ", np.sqrt(model.mse_resid))
 
+def compute_average_r2_rmse(df, cdk, random_states):
+    '''
+    Compute the average of r2 and rmse for each of the models created with different random states.
+
+    Args:
+        df,
+        cdk,
+        random_states list
+
+    Returns:
+        r2_s (list),
+        average of r2_s (float),
+        rmse_s (list),
+        average of rmse_s (float)
+    '''
+    r2_s = []
+    rmse_s = []
+    for i in range(len(random_states)):
+        # Make one model
+        model, _, _, _, _, _, _ = create_model(df, [cdk], random_state=random_states[i])
+
+        # Save the r2 and the rmse
+        r2_s.append(model.rsquared)
+        rmse_s.append(np.sqrt(model.mse_resid))
+
+    return r2_s, np.mean(r2_s), rmse_s, np.mean(rmse_s)
+
 
 def predict_log_affinity(model, smiles: str, scaler=scaler_cdk, pca=pca):
     """
@@ -83,7 +109,7 @@ def predict_log_affinity(model, smiles: str, scaler=scaler_cdk, pca=pca):
     # Ensure the dimensions match the model
     if fp_with_const.shape[1] != len(model.params):
         raise ValueError(
-            f"Feature dimension mismatch: model expects {len(model.params)}, got {fingerprint_with_const.shape[1]}."
+            f"Feature dimension mismatch: model expects {len(model.params)}, got {fp_with_const.shape[1]}."
         )
 
     # Make prediction
@@ -236,5 +262,4 @@ if __name__ == "__main__":
         pca=pca,
     )
 
-    print("BIG FAT COCK")
     print(f"prediction of smiles molecule is: {pred}")
