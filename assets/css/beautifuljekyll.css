@@ -133,6 +133,10 @@ img {
   -webkit-transition: padding .5s ease-in-out;
   -moz-transition: padding .5s ease-in-out;
   transition: padding .5s ease-in-out;
+  
+  /* New width and margin for gap on the left */
+  max-width: calc(100% - 5rem); /* Leave a gap of 3rem on the left */
+  margin-left: 5rem;
 }
 
 .navbar-custom,
@@ -215,6 +219,8 @@ img {
   .navbar-custom {
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
+    max-width: calc(100% - 3rem); /* Ensures gap is maintained */
+    margin-left: 3rem;
   }
 
   .navbar-custom .navbar-brand-logo {
@@ -255,7 +261,7 @@ img {
   width: 100%;
   word-break: break-word;
 }
-.navbar-custom .nav-item.dropdown .dropdown-menu .dropdown-item {
+.navbar-custom .nav-item.dropdown .dropdown-item {
   white-space: normal;
   padding: 0.625rem;
   background-color: {{ site.navbar-col | default: "#EAEAEA" }};
@@ -270,7 +276,7 @@ img {
     text-align: center;
   }
 
-  .navbar-custom .nav-item.dropdown .dropdown-menu .dropdown-item {
+  .navbar-custom .nav-item.dropdown .dropdown-item {
     padding-left: 0.625rem;
     border: 1px solid {{ site.navbar-border-col | default: "#DDDDDD" }};
     border-width: 0 1px 1px;
