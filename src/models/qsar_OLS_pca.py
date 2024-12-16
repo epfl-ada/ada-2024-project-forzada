@@ -59,7 +59,7 @@ def print_model_summary(model, model_summary=False):
     print("RMSE: ", np.sqrt(model.mse_resid))
 
 
-def compute_average_r2_rmse(df, cdk, random_states, col="Target Name"):
+def compute_average_r2_rmse(df, cdk, random_states):
     """
     Compute the average of r2 and rmse for each of the models created with different random states.
 
@@ -78,9 +78,7 @@ def compute_average_r2_rmse(df, cdk, random_states, col="Target Name"):
     rmse_s = []
     for i in range(len(random_states)):
         # Make one model
-        model, _, _, _, _, _, _ = create_model(
-            df, [cdk], random_state=random_states[i], col=col
-        )
+        model, _, _, _, _, _, _ = create_model(df, [cdk], random_state=random_states[i])
 
         # Save the r2 and the rmse
         r2_s.append(model.rsquared)
@@ -259,9 +257,7 @@ if __name__ == "__main__":
 
     # Feature engineering with PCA
 
-    model, X_train, X_test, y_train, y_test, scaler, pca = create_model(
-        df, cdks, col="Cleaned Target Name"
-    )
+    model, X_train, X_test, y_train, y_test, scaler, pca = create_model(df, cdks)
 
     print(
         f"Number of features after PCA: {X_train.shape[1] - 1}"

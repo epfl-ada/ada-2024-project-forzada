@@ -41,17 +41,8 @@ def preprocess_df(df: pd.DataFrame, cdks: list[str], col="Target Name") -> pd.Da
         pd.DataFrame: A Dataframe with added fingerprint for each smiles.
     """
 
-    # Check if the CDKs are in the DataFrame
-    if not all(cdk in df.columns for cdk in cdks):
-        print(f"These cdks are not in the DataFrame: {cdks}")
-        raise ValueError("CDKs not found in DataFrame")
-
     # Filter the DataFrame to only contain rows with desired CDKs and create an explicit copy
     df = df[df[col].isin(cdks)].copy()
-
-    if df.empty:
-        print(f"No data for these CDKs: {cdks}")
-        raise ValueError("No data for these CDKs")
 
     # If a ligand smiles has been tested on multiple CDKs, keep an average of the IC50 values measured for this specific ligand
     # and drop the duplicates
