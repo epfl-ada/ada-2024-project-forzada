@@ -1,17 +1,35 @@
 <footer class="footer-min">
-  <!-- Author Images and Forzada Text -->
-  <div class="author-images" style="display: flex; align-items: center; justify-content: center; gap: 30px; padding: 20px;">
-    <div class="image-container" style="display: flex; gap: 15px;">
-      <img src="{{ 'assets/img/johanne.jpg' | relative_url }}" alt="Author 1" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-      <img src="{{ 'assets/img/julie.jpg' | relative_url }}" alt="Author 2" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-      <img src="{{ 'assets/img/mathias.jpg' | relative_url }}" alt="Author 3" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-      <img src="{{ 'assets/img/mathilde.jpg' | relative_url }}" alt="Author 4" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-      <img src="{{ 'assets/img/timon.jpg' | relative_url }}" alt="Author 5" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+  <!-- Author Images and Names -->
+  <div class="author-info" style="display: flex; justify-content: center; align-items: center; gap: 20px; padding: 20px; flex-wrap: wrap;">
+    <!-- Author 1 -->
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="{{ 'assets/img/johanne.jpg' | relative_url }}" alt="Author 1" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+      <span style="font-size: 1.1rem; font-weight: bold;">Johanne</span>
     </div>
-    <span class="forzada" style="font-size: 24px; font-weight: bold; font-family: 'Arial', sans-serif;">Forzada</span>
+    <!-- Author 2 -->
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="{{ 'assets/img/julie.jpg' | relative_url }}" alt="Author 2" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+      <span style="font-size: 1.1rem; font-weight: bold;">Julie</span>
+    </div>
+    <!-- Author 3 -->
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="{{ 'assets/img/mathias.jpg' | relative_url }}" alt="Author 3" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+      <span style="font-size: 1.1rem; font-weight: bold;">Mathias</span>
+    </div>
+    <!-- Author 4 -->
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="{{ 'assets/img/mathilde.jpg' | relative_url }}" alt="Author 4" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+      <span style="font-size: 1.1rem; font-weight: bold;">Mathilde</span>
+    </div>
+    <!-- Author 5 -->
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="{{ 'assets/img/timon.jpg' | relative_url }}" alt="Author 5" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+      <span style="font-size: 1.1rem; font-weight: bold;">Timon</span>
+    </div>
   </div>
 
-  <div class="text-muted" style="text-align: center; margin-top: 20px;">
+  <!-- Footer Text -->
+  <div class="text-muted" style="text-align: center; margin-top: 20px; font-size: 0.9rem;">
     {% if site.author %}
       {{ site.author }}
       &nbsp;&nbsp;&bull;&nbsp;&nbsp;
@@ -24,7 +42,7 @@
 
     {% if site.url-pretty %}
       &nbsp;&nbsp;&bull;&nbsp;&nbsp;
-      <a href="{{ '' | absolute_url }}">{{ site.url-pretty }}</a>
+      <a href="{{ '' | absolute_url }}" style="color: #555;">{{ site.url-pretty }}</a>
     {% endif %}
   </div>
 </footer>
