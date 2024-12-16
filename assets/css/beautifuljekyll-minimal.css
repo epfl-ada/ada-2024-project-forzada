@@ -11,3 +11,23 @@ footer.footer-min {
   border-top: 1px solid #eeeeee;
   text-align: center;
 }
+
+.footer-min {
+  text-align: center; /* Center-align the content */
+  padding: 10px 0;
+  background-color: #f8f9fa; /* Light grey background */
+}
+
+.author-images {
+  margin-top: 10px;
+}
+
+.author-images img {
+  width: 60px; /* Set the size of the images */
+  height: 60px;
+  object-fit: cover; /* Crop and maintain aspect ratio */
+  border-radius: 50%; /* Make images circular */
+  margin: 0 8px; /* Add space between images */
+  border: 2px solid #ddd; /* Optional: subtle border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: shadow for depth */
+}
