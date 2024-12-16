@@ -78,18 +78,24 @@ subtitle: A data story about Cyclin-Dependent Kinases
     }
 
     /* Content Styling */
-    .content {
-      margin-left: 300px;
-      padding: 20px;
-      background-color: #f9f9f9;
-      min-height: 100vh;
-    }
+    /* Content Container Styling */
+.content {
+  margin-left: 280px; /* Leave space for sidebar */
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  width: calc(100% - 280px); /* Use all the available space minus the sidebar */
+}
 
-    .content-section {
-    padding: 20px; /* Adds uniform spacing on all sides */
-    max-width: 90%; /* Make content sections take up 90% of the screen width */
-    margin: 0 auto; /* Centers the content horizontally */
-    border-bottom: none; /* Removes the horizontal line */
+/* Content Section Styling */
+.content-section {
+  padding: 20px; /* Adds uniform spacing */
+  width: 100%; /* Make each section full width */
+  max-width: none; /* Remove any previous width constraints */
+  margin: 20px auto; /* Add some vertical spacing and keep it centered */
+  background-color: #fff; /* Optional: white background to stand out */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: slight shadow for depth */
+  border-radius: 8px; /* Optional: rounded corners */
 }
 
     .image-placeholder {
