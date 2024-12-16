@@ -53,43 +53,43 @@ layout: home
 
   /* Sidebar Styling */
   .sidenav {
-    height: 100%;
-    width: 18%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #2c3e50;
-    overflow-x: hidden;
-    padding-top: 20px;
-    z-index: 100000;
-    color: #ecf0f1;
-  }
+      height: 100%;
+      width: 18%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #2c3e50;
+      overflow-x: hidden;
+      padding-top: 40px; /* Adjust top padding for margin */
+      z-index: 100000;
+      color: #ecf0f1;
+    }
 
-  .sidenav .header {
-    font-size: 24px;
-    color: #f1c40f;
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
+    .sidenav .header {
+      font-size: 24px;
+      color: #f1c40f;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
 
-  .sidenav a {
-    padding: 10px 20px;
-    display: block;
-    color: #ecf0f1;
-    transition: 0.3s;
-  }
+    .sidenav a {
+      padding: 10px 20px;
+      display: block;
+      color: #ecf0f1;
+      transition: 0.3s;
+    }
 
-  .sidenav a:hover {
-    background-color: #34495e;
-    color: #f1c40f;
-    padding-left: 25px;
-  }
+    .sidenav a:hover,
+    .sidenav a.active {
+      background-color: #34495e;
+      color: #f1c40f;
+      padding-left: 25px;
+    }
 
-  .sidenav .submenu a {
-    padding-left: 30px;
-  }
-
+    .sidenav .submenu a {
+      padding-left: 30px;
+    }
   .content {
     position: relative; /* Ensure the 'left' property works */
     left: 9%; /* Offset content by 18% to account for the sidebar */
@@ -205,5 +205,33 @@ layout: home
       <p>We now study the ligands that bind to CDKs. Do ligands with high affinity share structural patterns?</p>
     </div>
   </div>
+  <script>
+    // Function to detect which section is currently in view
+    window.addEventListener('scroll', function () {
+      // Get all the links in the sidebar
+      const sidebarLinks = document.querySelectorAll('.sidenav a');
+
+      // Get all sections
+      const sections = document.querySelectorAll('.content-section');
+
+      let currentSection = null;
+
+      // Loop through sections to see which one is in the viewport
+      sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+          currentSection = index;
+        }
+      });
+
+      // Remove 'active' class from all sidebar links
+      sidebarLinks.forEach(link => link.classList.remove('active'));
+
+      // Add 'active' class to the corresponding sidebar link
+      if (currentSection !== null) {
+        sidebarLinks[currentSection + 1].classList.add('active'); // +1 because the first link is the header
+      }
+    });
+  </script>
 </body>
 </html>
