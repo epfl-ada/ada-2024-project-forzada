@@ -31,36 +31,66 @@ common-js:
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overlay Sidebar</title>
+    <title>Enhanced Sidebar</title>
     <style>
       /* Sidebar styling */
       .sidenav {
-        height: 100%; /* Full height */
-        width: 300px; /* Initially hidden */
+        height: 100%; 
+        width: 280px; 
         position: fixed;
         top: 0;
         left: 0;
-        background-color: #2c3e50; /* Dark blue */
-        overflow-x: hidden; /* Disable scroll */
-        transition: 0.4s; /* Smooth opening effect */
+        background-color: rgba(44, 62, 80, 0.95); /* Dark blue with slight transparency */
+        overflow-x: hidden; 
+        transition: 0.4s; 
         padding-top: 20px;
-        z-index: 100000; /* Ensure it's above other elements */
+        z-index: 100000;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
       }
   
+      /* Header section */
+      .sidenav .header {
+        font-size: 24px;
+        color: #f1c40f; /* Yellow highlight */
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+        padding: 10px 0;
+        border-bottom: 1px solid #34495e;
+      }
+  
+      /* Main links */
       .sidenav a {
         padding: 12px 20px;
         text-decoration: none;
         font-size: 18px;
-        color: #ecf0f1; /* Light grey text */
+        color: #ecf0f1; 
         display: block;
         transition: 0.3s;
+        cursor: pointer;
       }
   
       .sidenav a:hover {
-        background-color: #34495e; /* Slight hover background */
-        color: #f1c40f; /* Highlight yellow */
+        background-color: #34495e;
+        color: #f1c40f;
+        padding-left: 25px; /* Small slide animation */
       }
   
+      /* Sub-bullet points */
+      .sidenav .submenu {
+        padding-left: 30px;
+        font-size: 16px;
+      }
+  
+      .sidenav .submenu a {
+        color: #bdc3c7; /* Lighter text */
+        font-size: 16px;
+      }
+  
+      .sidenav .submenu a:hover {
+        color: #f39c12; /* Orange highlight */
+        padding-left: 35px;
+      }
   
       /* Background overlay */
       .overlay {
@@ -69,9 +99,9 @@ common-js:
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-        z-index: 999; /* Below sidebar but above content */
-        visibility: visible; /* Initially hidden */
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999; 
+        visibility: hidden; 
         opacity: 0;
         transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
       }
@@ -82,36 +112,31 @@ common-js:
       }
     </style>
   </head>
-  
   <body>
+  
+    <!-- Background overlay -->
+    <div class="overlay" id="overlay"></div>
   
     <!-- Sidebar navigation -->
     <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div class="header">Navigation</div>
       <a href="#">Introduction</a>
       <a href="#">Blabla</a>
-      <a href="#">hmmm</a>
+      <div class="submenu">
+        <a href="#">Details 1</a>
+        <a href="#">Details 2</a>
+      </div>
+      <a href="#">Hmmm</a>
+      <div class="submenu">
+        <a href="#">More Info 1</a>
+        <a href="#">More Info 2</a>
+      </div>
       <a href="#">Results</a>
+      <div class="submenu">
+        <a href="#">Analysis</a>
+        <a href="#">Conclusion</a>
+      </div>
     </div>
-  
-    <!-- Background overlay -->
-    <div id="overlay" class="overlay" onclick="closeNav()"></div>
-  
-    <!-- Open Sidebar Button -->
-    <button id="openBtn" onclick="openNav()">☰ Open Sidebar</button>
-  
-    <!-- JavaScript for Sidebar -->
-    <script>
-      function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("overlay").classList.add("active"); // Show overlay
-      }
-  
-      function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("overlay").classList.remove("active"); // Hide overlay
-      }
-    </script>
   
   </body>
   
