@@ -41,8 +41,27 @@ def preprocess_df(df: pd.DataFrame, cdks: list[str], col="Target Name") -> pd.Da
         pd.DataFrame: A Dataframe with added fingerprint for each smiles.
     """
 
+    # Check if the CDKs are in the DataFrame
+    if not all(cdk in df.columns for cdk in cdks):
+        print(f"These cdks are not in the DataFrame: {cdks}")
+        raise ValueError("CDKs not found in DataFrame")
+
     # Filter the DataFrame to only contain rows with desired CDKs and create an explicit copy
     df = df[df[col].isin(cdks)].copy()
+
+    if df.empty:
+        print(f"No data for these CDKs: {cdks}")
+        raise ValueError("No data for these CDKs")
+
+    # If a ligand smiles has been tested on multiple CDKs, keep an average of the IC50 values measured for this specific ligand
+    # and drop the duplicates
+
+    if len(cdks) > 1:
+
+        df = df.groupby(["Ligand SMILES"], as_index=False).agg(
+            {"IC50 (nM)": "mean", col: "first"}
+        )
+        df = df.drop_duplicates(subset=["Ligand SMILES"])
 
     # Adding log values of IC50 and dropping rows with NaN values
     df.loc[:, "log_IC50"] = np.log(df["IC50 (nM)"].values)
@@ -131,6 +150,7 @@ def make_features_and_target_PCA(
         X_train, X_test, y_train, y_test, scaler, pca
     """
     # Splitting the data
+    print(df["Fingerprint"][1])
     X = np.stack(df["Fingerprint"].values)
     y = df["log_IC50"].values
     X_train, X_test, y_train, y_test = train_test_split(

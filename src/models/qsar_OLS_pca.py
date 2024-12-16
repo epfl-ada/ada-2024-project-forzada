@@ -23,9 +23,11 @@ pca = PCA(n_components=0.95)
 # TODO: set PCA as default in helper function to create features and target arrays
 
 
-def create_model(df: pd.DataFrame, cdk, random_state = 42):
-    df = preprocess_df(df, cdk)
-    X_train, X_test, y_train, y_test, scaler, pca = make_features_and_target_PCA(df, state = random_state)
+def create_model(df: pd.DataFrame, cdk, random_state=42, col="Target Name"):
+    df = preprocess_df(df, cdk, col=col)
+    X_train, X_test, y_train, y_test, scaler, pca = make_features_and_target_PCA(
+        df, state=random_state
+    )
     model = train_model(X_train, y_train)
     return model, X_train, X_test, y_train, y_test, scaler, pca
 
@@ -56,8 +58,9 @@ def print_model_summary(model, model_summary=False):
     print("MSE: ", model.mse_resid)
     print("RMSE: ", np.sqrt(model.mse_resid))
 
-def compute_average_r2_rmse(df, cdk, random_states):
-    '''
+
+def compute_average_r2_rmse(df, cdk, random_states, col="Target Name"):
+    """
     Compute the average of r2 and rmse for each of the models created with different random states.
 
     Args:
@@ -70,12 +73,14 @@ def compute_average_r2_rmse(df, cdk, random_states):
         average of r2_s (float),
         rmse_s (list),
         average of rmse_s (float)
-    '''
+    """
     r2_s = []
     rmse_s = []
     for i in range(len(random_states)):
         # Make one model
-        model, _, _, _, _, _, _ = create_model(df, [cdk], random_state=random_states[i])
+        model, _, _, _, _, _, _ = create_model(
+            df, [cdk], random_state=random_states[i], col=col
+        )
 
         # Save the r2 and the rmse
         r2_s.append(model.rsquared)
@@ -228,12 +233,35 @@ def compare_cdkmodel_and_shuffled(model, y_train, X_train, y_test, X_test):
 
 if __name__ == "__main__":
     # Load data and choose CDKs
-    df = pd.read_csv("../data/IC50_df.csv")
-    cdks = ["Cyclin-A2/Cyclin-dependent kinase 2"]
+    df = pd.read_csv("../data/CDK_cleaned_for_families_prediction.csv")
+    cdks = [
+        "CDK5",
+        "CDK1-G2/M-Cyc1",
+        "CDK1",
+        "CDK1-CycA2",
+        "CDK1-G2/M-CycB",
+        "CDK3",
+        "CDK2[A144G]",
+        "CDK2[F80T]",
+        "CDK2[C118L,A144C]",
+        "CDK2[A144C]",
+        "CDK2",
+        "CDK2-CycA2[171-432]",
+        "CDK2-G1/S-CycE1",
+        "CDK2-CycA2",
+        "CDK2-CycA2[177-432]",
+        "CDK2[F80M]",
+        "CDK2-G1/S-CycE1-GSTP",
+        "CDK2-CycA1",
+        "CDK2[C118L]",
+        "CDK2[C118I]",
+    ]
 
     # Feature engineering with PCA
 
-    model, X_train, X_test, y_train, y_test, scaler, pca = create_model(df, cdks)
+    model, X_train, X_test, y_train, y_test, scaler, pca = create_model(
+        df, cdks, col="Cleaned Target Name"
+    )
 
     print(
         f"Number of features after PCA: {X_train.shape[1] - 1}"
