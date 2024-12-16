@@ -16,10 +16,24 @@ layout: home
       padding: 0;
       line-height: 1.6;
       color: #333;
+      background-color: #f9f9f9;
     }
 
     h1, h2, h3 {
       color: #2c3e50;
+      margin-top: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1.75rem;
+      margin-bottom: 20px;
     }
 
     p {
@@ -39,7 +53,7 @@ layout: home
     /* Sidebar Styling */
     .sidenav {
       height: 100%;
-      width: 280px;
+      width: 250px;
       position: fixed;
       top: 0;
       left: 0;
@@ -59,7 +73,7 @@ layout: home
     }
 
     .sidenav a {
-      padding: 12px 20px;
+      padding: 10px 20px;
       display: block;
       color: #ecf0f1;
       transition: 0.3s;
@@ -71,30 +85,24 @@ layout: home
       padding-left: 25px;
     }
 
-    .sidenav .submenu {
+    .sidenav .submenu a {
       padding-left: 30px;
     }
 
     /* Content Styling */
-    /* Content Container Styling */
-.content {
-  margin-left: 280px; /* Leave space for sidebar */
-  padding: 20px;
-  background-color: #f9f9f9;
-  min-height: 100vh;
-  width: calc(100% - 280px); /* Use all the available space minus the sidebar */
-}
+    .content {
+      margin-left: 270px; /* Leave space for sidebar */
+      padding: 20px;
+      max-width: 900px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      margin: 20px auto;
+    }
 
-/* Content Section Styling */
-.content-section {
-  padding: 20px; /* Adds uniform spacing */
-  width: 100%; /* Make each section full width */
-  max-width: none; /* Remove any previous width constraints */
-  margin: 20px auto; /* Add some vertical spacing and keep it centered */
-  background-color: #fff; /* Optional: white background to stand out */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: slight shadow for depth */
-  border-radius: 8px; /* Optional: rounded corners */
-}
+    .content-section {
+      margin-bottom: 20px;
+    }
 
     .image-placeholder {
       background-color: #bdc3c7;
@@ -103,6 +111,27 @@ layout: home
       text-align: center;
       line-height: 150px;
       color: #fff;
+      border-radius: 4px;
+    }
+
+    .title-container {
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 20px;
+      background-color: #34495e;
+      color: #ecf0f1;
+      border-radius: 8px;
+    }
+
+    .title-container h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
+
+    .title-container h2 {
+      margin: 5px 0 0;
+      font-size: 1.5rem;
+      color: #f1c40f;
     }
   </style>
 </head>
@@ -131,18 +160,18 @@ layout: home
 
   <!-- Main Content -->
   <div class="content">
+    <!-- Title Section -->
+    <div class="title-container">
+      <h1>CDK Inhibitors in Cancer Treatment</h1>
+      <h2>Exploring the Role of CDKs in Cell Proliferation</h2>
+    </div>
+
     <!-- Introduction -->
     <div id="introduction" class="content-section">
       <h1>Introduction</h1>
       <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
 
       <p>In healthy cells, division occurs through mitosis, producing two new cells in a tightly regulated process known as the cell cycle. This cycle involves a series of intricate biochemical reactions. In cancer cells, however, the cell cycle becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells known as a tumor.</p>
-        
-      <p>But what if we could disrupt this cycle and halt cell proliferation in cancer patients?</p>
-        
-      <p>To explore this possibility, we need to delve deeper into the cell cycle. It consists of four distinct phases, each governed by specific enzymes, the main ones being the cyclin-dependent kinases (CDKs). For instance, CDK2, when bound to cyclin B, activates it and ensures the transition from the S phase to the G2 phase of the cycle.</p>
-        
-      <p>Could we find inhibitors that could target the CDKs/cyclin complex and therefore reduce the catalytic activity of  involved in this anarchic cell proliferation? Find molecules that could bind to a CDKs, therefore reducing its catalytic activity. </p>
     </div>
 
     <!-- Cell Cycle Overview -->
@@ -151,14 +180,10 @@ layout: home
       <p>The cell cycle consists of four distinct phases, each governed by specific enzymes. The main ones are the <strong>cyclin-dependent kinases (CDKs)</strong>. For example, CDK2, when bound to cyclin B, ensures the transition from the S phase to the G2 phase of the cycle.</p>
     </div>
 
+    <!-- CDKs and Cyclins -->
     <div id="enzymes" class="content-section">
       <h3>CDKs and Cyclins</h3>
       <p>CDKs are critical regulators of the cell cycle. Disrupting the CDK/cyclin complex can potentially halt uncontrolled proliferation.</p>
-    </div>
-
-    <div id="disruption" class="content-section">
-      <h3>Targeting CDKs</h3>
-      <p>Could we find inhibitors that target CDKs, reducing their catalytic activity and slowing down cancer cell proliferation?</p>
     </div>
 
     <!-- Research Question -->
@@ -167,47 +192,11 @@ layout: home
       <p>Could we find potential inhibitors of CDK activity from new ligands using BindingDB?</p>
     </div>
 
-    <!-- Study of CDKs -->
-    <div id="study-cdks" class="content-section">
-      <h2>Study of CDKs</h2>
-      <p>To find potential inhibitors, we first need to study the CDKs themselves. Our database contains 47 different CDKs and their amino acid sequences.</p>
-
-      <div id="dna-sequence" class="content-section">
-        <h3>DNA Sequence Similarities</h3>
-        <p>Are the CDKs similar enough that they would bind to the same ligands? Or do they have significant differences that allow for specificity?</p>
-      </div>
-
-      <div id="visual-rep" class="content-section">
-        <h3>Visual Representations</h3>
-        <ul>
-          <li>Heatmaps (e.g., Johanne's results)</li>
-          <li>Phylogenetic trees</li>
-          <li>Cluster comparison methods</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Study of Ligands -->
+    <!-- Ligands -->
     <div id="study-ligands" class="content-section">
       <h2>Study of Ligands</h2>
       <p>We now study the ligands that bind to CDKs. Do ligands with high affinity share structural patterns?</p>
-
-      <div id="affinity-patterns" class="content-section">
-        <h3>Affinity Patterns</h3>
-        <p>We observed that ligands with strong affinity for CDKs of the same family have approximately 25% similarity in their molecular structure. This suggests that molecular conformation plays a critical role in binding.</p>
-      </div>
-
-      <div id="ligand-visuals" class="content-section">
-        <h3>Ligand Visual Representations</h3>
-        <ul>
-          <li>Similarity matrix heatmaps</li>
-          <li>Structural images of molecules</li>
-        </ul>
-        <div class="image-placeholder">Example Molecule Image</div>
-      </div>
     </div>
   </div>
 </body>
 </html>
-
-
