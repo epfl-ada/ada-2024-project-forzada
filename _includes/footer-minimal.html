@@ -1,13 +1,17 @@
 <footer class="footer-min">
-  <!-- Author Images -->
-  <div class="author-images" style="display: flex; justify-content: center; align-items: center; gap: 15px; padding: 20px;">
-    <img src="{{ 'assets/img/johanne.jpg' | relative_url }}" alt="Author 1" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-    <img src="{{ 'assets/img/julie.jpg' | relative_url }}" alt="Author 2" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-    <img src="{{ 'assets/img/mathias.jpg' | relative_url }}" alt="Author 3" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-    <img src="{{ 'assets/img/mathilde.jpg' | relative_url }}" alt="Author 4" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-    <img src="{{ 'assets/img/timon.jpg' | relative_url }}" alt="Author 5" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+  <!-- Author Images and Forzada Text -->
+  <div class="author-images" style="display: flex; align-items: center; justify-content: center; gap: 30px; padding: 20px;">
+    <div class="image-container" style="display: flex; gap: 15px;">
+      <img src="{{ 'assets/img/johanne.jpg' | relative_url }}" alt="Author 1" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+      <img src="{{ 'assets/img/julie.jpg' | relative_url }}" alt="Author 2" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+      <img src="{{ 'assets/img/mathias.jpg' | relative_url }}" alt="Author 3" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+      <img src="{{ 'assets/img/mathilde.jpg' | relative_url }}" alt="Author 4" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+      <img src="{{ 'assets/img/timon.jpg' | relative_url }}" alt="Author 5" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+    </div>
+    <span class="forzada" style="font-size: 24px; font-weight: bold; font-family: 'Arial', sans-serif;">Forzada</span>
   </div>
-  <div class="text-muted" style="text-align: center;">
+
+  <div class="text-muted" style="text-align: center; margin-top: 20px;">
     {% if site.author %}
       {{ site.author }}
       &nbsp;&nbsp;&bull;&nbsp;&nbsp;
@@ -24,3 +28,4 @@
     {% endif %}
   </div>
 </footer>
+
