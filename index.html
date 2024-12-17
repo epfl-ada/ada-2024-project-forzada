@@ -13,8 +13,12 @@ layout: home
   
 img {
   .content img {
-  max-width: 100%; /* Scale the image within its container */
-  display: block; /* Ensure the image is treated as a block-level element */
+    max-width: 100%; /* Ensure the image does not exceed the width of the container */
+  width: auto; /* Maintain the intrinsic width when the container is larger */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Treat the image as a block-level element */
+  margin: 20px auto; /* Center the image horizontally and add vertical spacing */
+  box-sizing: border-box; /* Ensure padding is included in the element's dimensions */
 }
 }
 
@@ -182,6 +186,8 @@ a:hover {
 
     <!-- Introduction -->
     <div id="introduction" class="content-section">
+
+    <p> </p>
   
     <p><strong>Globally, 1 in 6 people die from cancer.</strong> Despite the many differences between cancers, they all share a defining characteristic: <span class="highlight">uncontrolled cell proliferation</span>. But what exactly is cell proliferation?</p>
     
