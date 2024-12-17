@@ -13,7 +13,7 @@ layout: home
   
 img {
   .content img {
-    max-width: 100%; /* Ensure the image does not exceed the width of the container */
+    max-width: 80%; /* Ensure the image does not exceed the width of the container */
   width: auto; /* Maintain the intrinsic width when the container is larger */
   height: auto; /* Maintain aspect ratio */
   display: block; /* Treat the image as a block-level element */
@@ -213,6 +213,9 @@ a:hover {
     <p>One way to measure the similarity between CDK sequences is through the <strong>Levenshtein distance</strong>. This metric calculates the minimum number of single-character edits (insertions, deletions, or substitutions) needed to transform one sequence into another. Essentially, the smaller the distance, the more similar the sequences.</p>
     
     <p>For instance, we hypothesize that CDKs with similar names, such as <strong>CDK2-CycA2</strong> and <strong>CDK2-G1/S-CycE1</strong>, may also have similar sequences and therefore belong to the same family. By analyzing the Levenshtein distance between these sequences, we can test this hypothesis and begin to group CDKs into meaningful families.</p>
+    
+    <iframe src="levenshtein_demo.html"></iframe>
+    
     <!-- Cell Cycle Overview -->
     <div id="cell-cycle" class="content-section">
       <h2>Cell Cycle Overview</h2>

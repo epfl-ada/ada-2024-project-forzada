@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Levenshtein Distance Demo</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    label {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    input[type="text"] {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .output {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      padding: 10px;
+      background-color: #ecf0f1;
+      border-radius: 8px;
+    }
+
+    .steps {
+      margin-top: 10px;
+      text-align: left;
+      padding: 10px;
+      background: #fefefe;
+      border: 1px dashed #ccc;
+      border-radius: 4px;
+    }
+
+    .steps span {
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Levenshtein Distance Calculator</h1>
+    <p>Type two words to see how many steps it takes to transform one into the other!</p>
+
+    <label for="string1">String 1:</label>
+    <input type="text" id="string1" placeholder="Enter the first string">
+
+    <label for="string2">String 2:</label>
+    <input type="text" id="string2" placeholder="Enter the second string">
+
+    <button onclick="calculateDistance()">Calculate Distance</button>
+
+    <div class="output" id="result"></div>
+  </div>
+
+  <script>
+    function calculateDistance() {
+      const string1 = document.getElementById('string1').value.trim();
+      const string2 = document.getElementById('string2').value.trim();
+
+      if (!string1 || !string2) {
+        document.getElementById('result').innerHTML = "Please enter both strings.";
+        return;
+      }
+
+      const [distance, steps] = levenshteinDistance(string1, string2);
+
+      let output = `<p><strong>Levenshtein Distance:</strong> ${distance}</p>`;
+      output += '<div class="steps"><strong>Steps:</strong><br>';
+      steps.forEach((step, index) => {
+        output += `<span>Step ${index + 1}:</span> ${step}<br>`;
+      });
+      output += '</div>';
+
+      document.getElementById('result').innerHTML = output;
+    }
+
+    function levenshteinDistance(a, b) {
+      const m = a.length, n = b.length;
+      const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+      const steps = [];
+
+      // Initialize dp array
+      for (let i = 0; i <= m; i++) dp[i][0] = i;
+      for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+      // Fill dp array and track operations
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          if (a[i - 1] === b[j - 1]) {
+            dp[i][j] = dp[i - 1][j - 1]; // No operation
+          } else {
+            const insertion = dp[i][j - 1] + 1;
+            const deletion = dp[i - 1][j] + 1;
+            const substitution = dp[i - 1][j - 1] + 1;
+
+            dp[i][j] = Math.min(insertion, deletion, substitution);
+
+            // Record the operation
+            if (dp[i][j] === insertion) {
+              steps.push(`Insert '${b[j - 1]}' at position ${i}`);
+            } else if (dp[i][j] === deletion) {
+              steps.push(`Delete '${a[i - 1]}' from position ${i - 1}`);
+            } else if (dp[i][j] === substitution) {
+              steps.push(`Substitute '${a[i - 1]}' with '${b[j - 1]}' at position ${i - 1}`);
+            }
+          }
+        }
+      }
+
+      return [dp[m][n], steps];
+    }
+  </script>
+</body>
+</html>
