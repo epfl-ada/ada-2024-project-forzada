@@ -7,150 +7,127 @@
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #f4f4f4;
+      background-color: #f4f7f6;
       margin: 0;
-      padding: 20px;
-      color: #333;
-      text-align: center;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
     .container {
-      max-width: 600px;
-      margin: 0 auto;
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 20px;
+      background-color: #ffffff;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+      width: 70%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
-      color: #2c3e50;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #34495e;
     }
 
-    label {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-      display: block;
+    .inputs-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 20px;
     }
 
     input[type="text"] {
-      width: 90%;
+      width: 45%;
       padding: 10px;
-      margin: 10px 0;
-      font-size: 1rem;
+      border-radius: 4px;
       border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    button {
-      padding: 10px 20px;
       font-size: 1rem;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+      margin: 10px 0;
+      box-sizing: border-box;
     }
 
-    button:hover {
-      background-color: #2980b9;
-    }
-
-    .output {
+    .distance-container {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
       margin-top: 20px;
-      font-size: 1.2rem;
-      padding: 10px;
-      background-color: #ecf0f1;
-      border-radius: 8px;
-    }
-
-    .steps {
-      margin-top: 10px;
-      text-align: left;
-      padding: 10px;
-      background: #fefefe;
-      border: 1px dashed #ccc;
-      border-radius: 4px;
-    }
-
-    .steps span {
       color: #e74c3c;
     }
+
+    .info-text {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      margin-top: 10px;
+    }
+
   </style>
 </head>
 <body>
+
   <div class="container">
-    <h1>Levenshtein Distance Calculator</h1>
-    <p>Type two words to see how many steps it takes to transform one into the other!</p>
+    <h1>Levenshtein Distance Demo</h1>
 
-    <label for="string1">String 1:</label>
-    <input type="text" id="string1" placeholder="Enter the first string">
+    <!-- Input Fields -->
+    <div class="inputs-container">
+      <input type="text" id="string1" placeholder="Enter first string" oninput="calculateDistance()">
+      <input type="text" id="string2" placeholder="Enter second string" oninput="calculateDistance()">
+    </div>
 
-    <label for="string2">String 2:</label>
-    <input type="text" id="string2" placeholder="Enter the second string">
+    <!-- Distance Output -->
+    <div class="distance-container" id="distance">
+      Distance: 0
+    </div>
 
-    <button onclick="calculateDistance()">Calculate Distance</button>
-
-    <div class="output" id="result"></div>
+    <p class="info-text">
+      Start typing in both fields and see how similar the strings are. The distance will update instantly!
+    </p>
   </div>
 
   <script>
+    // Function to calculate the Levenshtein distance between two strings
     function calculateDistance() {
-      const string1 = document.getElementById('string1').value.trim();
-      const string2 = document.getElementById('string2').value.trim();
+      const str1 = document.getElementById('string1').value;
+      const str2 = document.getElementById('string2').value;
 
-      if (!string1 || !string2) {
-        document.getElementById('result').innerHTML = "Please enter both strings.";
-        return;
-      }
+      const distance = getLevenshteinDistance(str1, str2);
 
-      const [distance, steps] = levenshteinDistance(string1, string2);
-
-      let output = `<p><strong>Levenshtein Distance:</strong> ${distance}</p>`;
-      output += '<div class="steps"><strong>Steps:</strong><br>';
-      steps.forEach((step, index) => {
-        output += `<span>Step ${index + 1}:</span> ${step}<br>`;
-      });
-      output += '</div>';
-
-      document.getElementById('result').innerHTML = output;
+      document.getElementById('distance').textContent = `Distance: ${distance}`;
     }
 
-    function levenshteinDistance(a, b) {
-      const m = a.length, n = b.length;
-      const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
-      const steps = [];
+    // Levenshtein Distance algorithm
+    function getLevenshteinDistance(a, b) {
+      const tmp = [];
+      let i, j, alen = a.length, blen = b.length, cost;
 
-      // Initialize dp array
-      for (let i = 0; i <= m; i++) dp[i][0] = i;
-      for (let j = 0; j <= n; j++) dp[0][j] = j;
+      if (alen === 0) {
+        return blen;
+      }
+      if (blen === 0) {
+        return alen;
+      }
 
-      // Fill dp array and track operations
-      for (let i = 1; i <= m; i++) {
-        for (let j = 1; j <= n; j++) {
-          if (a[i - 1] === b[j - 1]) {
-            dp[i][j] = dp[i - 1][j - 1]; // No operation
-          } else {
-            const insertion = dp[i][j - 1] + 1;
-            const deletion = dp[i - 1][j] + 1;
-            const substitution = dp[i - 1][j - 1] + 1;
+      for (i = 0; i <= alen; i++) {
+        tmp[i] = [i];
+      }
+      for (j = 0; j <= blen; j++) {
+        tmp[0][j] = j;
+      }
 
-            dp[i][j] = Math.min(insertion, deletion, substitution);
-
-            // Record the operation
-            if (dp[i][j] === insertion) {
-              steps.push(`Insert '${b[j - 1]}' at position ${i}`);
-            } else if (dp[i][j] === deletion) {
-              steps.push(`Delete '${a[i - 1]}' from position ${i - 1}`);
-            } else if (dp[i][j] === substitution) {
-              steps.push(`Substitute '${a[i - 1]}' with '${b[j - 1]}' at position ${i - 1}`);
-            }
-          }
+      for (i = 1; i <= alen; i++) {
+        for (j = 1; j <= blen; j++) {
+          cost = a[i - 1] === b[j - 1] ? 0 : 1;
+          tmp[i][j] = Math.min(tmp[i - 1][j] + 1, tmp[i][j - 1] + 1, tmp[i - 1][j - 1] + cost);
         }
       }
 
-      return [dp[m][n], steps];
+      return tmp[alen][blen];
     }
   </script>
+
 </body>
 </html>
