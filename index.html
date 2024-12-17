@@ -183,16 +183,32 @@ a:hover {
     <!-- Introduction -->
     <div id="introduction" class="content-section">
       <h1>Introduction</h1>
-      <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
-
-      <p>In healthy cells, division occurs through mitosis, producing two new cells in a tightly regulated process known as the cell cycle. This cycle involves a series of intricate biochemical reactions. In cancer cells, however, the cell cycle becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells known as a tumor.</p>
-        
-      <p>But what if we could disrupt this cycle and halt cell proliferation in cancer patients?</p>
-        
-      <p>To explore this possibility, we need to delve deeper into the cell cycle. It consists of four distinct phases, each governed by specific enzymes, the main ones being the cyclin-dependent kinases (CDKs). For instance, CDK2, when bound to cyclin B, activates it and ensures the transition from the S phase to the G2 phase of the cycle.</p>
-        
-      <p>Could we find inhibitors that could target the CDKs/cyclin complex and therefore reduce the catalytic activity of  involved in this anarchic cell proliferation? Find molecules that could bind to a CDKs, therefore reducing its catalytic activity.</p>
-    </div>
+      <h1>Understanding CDKs and Their Role in Cancer Research</h1>
+    
+    <p><strong>Globally, 1 in 6 people die from cancer.</strong> Despite the many differences between cancers, they all share a defining characteristic: <span class="highlight">uncontrolled cell proliferation</span>. But what exactly is cell proliferation?</p>
+    
+    <p>In healthy cells, division occurs through a process called mitosis, resulting in the production of two new cells. This process is carefully regulated through a series of biochemical reactions collectively known as the <strong>cell cycle</strong>. However, in cancer cells, this regulation fails, leading to an abnormally rapid and uncontrolled cell cycle. The result? A mass of proliferating cells, known as a tumor.</p>
+    
+    <p><strong>But what if we could disrupt this runaway cycle?</strong> What if we could halt cell proliferation in cancer patients and stop tumor growth?</p>
+    
+    <h2>The Cell Cycle and CDKs</h2>
+    <p>To explore this possibility, we need to take a closer look at the cell cycle. The cell cycle is divided into four distinct phases, each controlled by specific proteins. Among these, a class of enzymes called <span class="highlight">cyclin-dependent kinases (CDKs)</span> plays a central role. CDKs act as molecular switches, driving the cell through each phase of the cycle.</p>
+    
+    <p>For example, <strong>CDK2</strong>, when bound to its partner protein cyclin B, ensures the transition from the S phase (DNA synthesis) to the G2 phase (preparation for mitosis). This makes CDKs attractive targets for therapies aimed at slowing or stopping cell proliferation.</p>
+    
+    <p>Could we find <strong>inhibitors</strong> that bind to CDK-cyclin complexes and reduce their activity? If successful, such molecules could potentially disrupt the uncontrolled cell division characteristic of cancer.</p>
+    
+    <h2>Sorting CDKs by Families</h2>
+    <p>To design effective inhibitors, we need to better understand CDKs by grouping them into <strong>families</strong>. CDKs with similar amino acid sequences are likely to have similar interaction profiles with their ligands. This means that a molecule designed to inhibit one CDK might also inhibit other members of the same family.</p>
+    
+    <p>Additionally, CDKs within the same family may share similar functions in the cell cycle. This insight could guide the development of inhibitors capable of targeting multiple CDKs, effectively shutting down key steps in cell cycle progression.</p>
+    
+    <p>The most straightforward way to group CDKs into families is by analyzing their <strong>amino acid sequences</strong>. By comparing these sequences, we can determine which CDKs are closely related and which are distinct.</p>
+    
+    <h2>Using the Levenshtein Distance</h2>
+    <p>One way to measure the similarity between CDK sequences is through the <strong>Levenshtein distance</strong>. This metric calculates the minimum number of single-character edits (insertions, deletions, or substitutions) needed to transform one sequence into another. Essentially, the smaller the distance, the more similar the sequences.</p>
+    
+    <p>For instance, we hypothesize that CDKs with similar names, such as <strong>CDK2-CycA2</strong> and <strong>CDK2-G1/S-CycE1</strong>, may also have similar sequences and therefore belong to the same family. By analyzing the Levenshtein distance between these sequences, we can test this hypothesis and begin to group CDKs into meaningful families.</p>
     <!-- Cell Cycle Overview -->
     <div id="cell-cycle" class="content-section">
       <h2>Cell Cycle Overview</h2>
