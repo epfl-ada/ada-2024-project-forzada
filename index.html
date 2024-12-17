@@ -283,7 +283,7 @@ a:hover {
         const rect = section.getBoundingClientRect();
   
         // Check if the section is at or above the viewport's top
-        if (rect.top <= 0) {
+        if (rect.top < 0) {
           currentSectionIndex = index;
         }
       });
