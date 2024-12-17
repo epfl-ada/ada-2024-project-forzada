@@ -106,7 +106,7 @@ a:hover {
   left: 9%; /* Offset content by 18% to account for the sidebar */
   padding: 20px;
   width: 64%; /* Adjust width to account for the remaining space */
-  background-color: #bfb9b9;
+  background-color: #efefef;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   margin: 20px auto; /* Center horizontally and add vertical spacing */
@@ -201,12 +201,12 @@ a:hover {
 
     <!-- CDKs and Cyclins -->
     <div id="enzymes" class="content-section">
-      <h3>CDKs and Cyclins</h3>
+      <h3>enzymes</h3>
       <p>CDKs are critical regulators of the cell cycle. Disrupting the CDK/cyclin complex can potentially halt uncontrolled proliferation.</p>
     </div>
 
     <div id="disruption" class="content-section">
-      <h1>Introduction</h1>
+      <h1>disruption</h1>
       <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
 
       <p>In healthy cells, division occurs through mitosis, producing two new cells in a tightly regulated process known as the cell cycle. This cycle involves a series of intricate biochemical reactions. In cancer cells, however, the cell cycle becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells known as a tumor.</p>
@@ -225,7 +225,7 @@ a:hover {
     </div>
 
     <div id="study-cdks" class="content-section">
-      <h1>Introduction</h1>
+      <h1>study-cdks</h1>
       <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
 
       <p>In healthy cells, division occurs through mitosis, producing two new cells in a tightly regulated process known as the cell cycle. This cycle involves a series of intricate biochemical reactions. In cancer cells, however, the cell cycle becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells known as a tumor.</p>
@@ -238,7 +238,7 @@ a:hover {
     </div>
 
     <div id="dna-sequence" class="content-section">
-      <h1>Introduction</h1>
+      <h1>dna-sequence</h1>
       <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
 
       <p>In healthy cells, division occurs through mitosis, producing two new cells in a tightly regulated process known as the cell cycle. This cycle involves a series of intricate biochemical reactions. In cancer cells, however, the cell cycle becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells known as a tumor.</p>
@@ -251,7 +251,7 @@ a:hover {
     </div>
 
     <div id="visual-rep" class="content-section">
-      <h1>Introduction</h1>
+      <h1>visual-rep</h1>
       <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
 
       <p>In healthy cells, division occurs through mitosis, producing two new cells in a tightly regulated process known as the cell cycle. This cycle involves a series of intricate biochemical reactions. In cancer cells, however, the cell cycle becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells known as a tumor.</p>
@@ -274,26 +274,30 @@ a:hover {
     window.addEventListener('scroll', function () {
       // Get all the links in the sidebar
       const sidebarLinks = document.querySelectorAll('.sidenav a');
-
+  
       // Get all sections
       const sections = document.querySelectorAll('.content-section');
-
-      let currentSection = null;
-
-      // Loop through sections to see which one is in the viewport
+  
+      let currentSectionIndex = null;
+      let minDistanceToTop = Infinity; // Initialize with a large value
+  
+      // Loop through sections to find the one closest to the top of the viewport
       sections.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
-        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-          currentSection = index;
+        const distanceToTop = Math.abs(rect.top);
+  
+        if (distanceToTop < minDistanceToTop) {
+          minDistanceToTop = distanceToTop;
+          currentSectionIndex = index;
         }
       });
-
+  
       // Remove 'active' class from all sidebar links
       sidebarLinks.forEach(link => link.classList.remove('active'));
-
+  
       // Add 'active' class to the corresponding sidebar link
-      if (currentSection !== null) {
-        sidebarLinks[currentSection + 1].classList.add('active'); // +1 because the first link is the header
+      if (currentSectionIndex !== null) {
+        sidebarLinks[currentSectionIndex + 1].classList.add('active'); // +1 to skip the header link
       }
     });
   </script>
