@@ -60,18 +60,8 @@ def clean_target_name(row):
         return 'CDK2[F82H]-CycA2[171-432]'
     elif row['Target Name'] == 'Cyclin-A2 [171-432]/Cyclin-dependent kinase 2 [F82H,L83V,H84D]':
         return 'CDK2[F82H,L83V,H84D]-CycA2[171-432]'
-    elif row['Target Name'] == 'Cyclin-A2/Cyclin-dependent kinase 1':
-        return 'CDK1-CycA2'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 11B':
-        return 'CDK11B'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 11A':
-        return 'CDK11A'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 19':
-        return 'CDK19'
     elif row['Target Name'] == 'Cyclin-dependent kinase 7':
         return 'CDK7'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 8':
-        return 'CDK8'
     elif row['Target Name'] == 'Cyclin-dependent kinase 9':
         return 'CDK9'
     elif row['Target Name'] == 'Cyclin-A2 [177-432]/Cyclin-dependent kinase 2':
@@ -80,36 +70,12 @@ def clean_target_name(row):
         return 'CDK3'
     elif row['Target Name'] == 'Cyclin-dependent kinase 5':
         return 'CDK5'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 16':
-        return 'CDK16'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 17':
-        return 'CDK17'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 18 [3-474]':
-        return 'CDK18[3-474]'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 14':
-        return 'CDK14'
     elif row['Target Name'] == 'Cyclin-dependent kinase 6/G1/S-specific cyclin-D3':
         return 'CDK6-G1/S-CycD3'
     elif row['Target Name'] == 'Cyclin-dependent kinase 3/G1/S-specific cyclin-E1':
         return 'CDK3-G1/S-CycE1'
     elif row['Target Name'] == 'Cyclin-dependent kinase 6':
         return 'CDK6'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [C118L]':
-        return 'CDK2[C118L]'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [A144C]':
-        return 'CDK2[A144C]'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [C118L,A144C]':
-        return 'CDK2[C118L,A144C]'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [F80T]':
-        return 'CDK2[F80T]'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [F80M]':
-        return 'CDK2[F80M]'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [C118I]':
-        return 'CDK2[C118I]'
-    elif row['Target Name'] == 'Cyclin-dependent kinase 2 [A144G]':
-        return 'CDK2[A144G]'
-    elif row['Target Name'] == 'Cyclin-dependent kinase-like 2':
-        return 'CDKlike2'
     elif row['Target Name'] == 'Cyclin-dependent kinase 2/G1/S-specific cyclin-E1/Glutathione S-transferase P':
         return 'CDK2-G1/S-CycE1-GSTP'
     elif row['Target Name'] == 'Cyclin-A1/Cyclin-dependent kinase 2':
@@ -335,8 +301,8 @@ def ligand_similarity_matrix(df: pd.DataFrame) -> pd.DataFrame:
 
     # Get ligands info
     ligands_name_list = df["BindingDB Ligand Name"].tolist()
-    ligands_smiles_list = df["Ligand SMILES_x"].tolist()
-
+    #ligands_smiles_list = df["Ligand SMILES_x"].tolist()
+    ligands_smiles_list = df["Ligand SMILES"].tolist()
     # Bulk convert SMILES to molecules and generate fingerprints
     mols = [Chem.MolFromSmiles(s) for s in ligands_smiles_list]
     fps = [Chem.RDKFingerprint(m) for m in mols]
@@ -443,34 +409,44 @@ def create_df_on_intersection_of_values(df, col, val1, val2, merge_on):
 
 
 def summary_of_ligand_similarities(similarity_matrix):
+    if similarity_matrix.size == 0 or similarity_matrix.shape[0] == 0:
 
-    assert similarity_matrix.shape[0] == similarity_matrix.shape[1]
-
-    lower_triangle = np.tril(similarity_matrix)
-
-    # Flatten, remove ones in the diagonal and remove upper triangle
-
-    lower_triangle = lower_triangle.flatten()
+        return pd.Series({
+            "mean": np.nan,
+            "std": np.nan,
+            "min": np.nan,
+            "max": np.nan,
+            "no. similar ligands meas. >= 0.85": 0,
+            "no. of non-similar ligands meas. < 0.85": 0,
+            "count": 0,
+            "similar ligands %": np.nan,
+        })
+    
+    lower_triangle = np.tril(similarity_matrix).flatten()
     lower_triangle = lower_triangle[lower_triangle != 1]
     lower_triangle = lower_triangle[lower_triangle != 0]
 
-    # Summary
+    if lower_triangle.size == 0:
+        return pd.Series({
+            "mean": np.nan,
+            "std": np.nan,
+            "min": np.nan,
+            "max": np.nan,
+            "no. similar ligands meas. >= 0.85": 0,
+            "no. of non-similar ligands meas. < 0.85": 0,
+            "count": 0,
+            "similar ligands %": np.nan,
+        })
 
     summary = {
         "mean": np.mean(lower_triangle),
         "std": np.std(lower_triangle),
         "min": np.min(lower_triangle),
         "max": np.max(lower_triangle),
-        "no. similar ligands meas. >= 0.85": len(
-            lower_triangle[lower_triangle >= 0.85]
-        ),
-        "no. of non-similar ligands meas. < 0.85": len(
-            lower_triangle[lower_triangle < 0.85]
-        ),
+        "no. similar ligands meas. >= 0.85": len(lower_triangle[lower_triangle >= 0.85]),
+        "no. of non-similar ligands meas. < 0.85": len(lower_triangle[lower_triangle < 0.85]),
         "count": len(lower_triangle),
-        "similar ligands %": len(lower_triangle[lower_triangle >= 0.85])
-        / len(lower_triangle)
-        * 100,
+        "similar ligands %": len(lower_triangle[lower_triangle >= 0.85]) / len(lower_triangle) * 100,
     }
 
     return pd.Series(summary).T
