@@ -157,7 +157,7 @@ a:hover {
     <a href="#cell-cycle">Cell Cycle Overview</a>
     <div class="submenu">
       <a href="#enzymes">CDKs & Cyclins</a>
-      <a href="#disruption">Targeting CDK</a>
+      <a href="#disruption">disruption</a>
     </div>
     <a href="#research-question">Research Question</a>
     <a href="#study-cdks">Study of CDKs</a>
@@ -270,7 +270,7 @@ a:hover {
     </div>
   </div>
   <script>
-    // Function to detect which section is currently in view
+    // Function to detect which section is currently at the top of the viewport
     window.addEventListener('scroll', function () {
       // Get all the links in the sidebar
       const sidebarLinks = document.querySelectorAll('.sidenav a');
@@ -279,15 +279,15 @@ a:hover {
       const sections = document.querySelectorAll('.content-section');
   
       let currentSectionIndex = null;
-      let minDistanceToTop = Infinity; // Initialize with a large value
+      let minTopDistance = Infinity; // Initialize with a large value
   
       // Loop through sections to find the one closest to the top of the viewport
       sections.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
-        const distanceToTop = Math.abs(rect.top);
   
-        if (distanceToTop < minDistanceToTop) {
-          minDistanceToTop = distanceToTop;
+        // Check if the section is above or at the top of the viewport
+        if (rect.top >= 0 && rect.top < minTopDistance) {
+          minTopDistance = rect.top;
           currentSectionIndex = index;
         }
       });
@@ -297,10 +297,11 @@ a:hover {
   
       // Add 'active' class to the corresponding sidebar link
       if (currentSectionIndex !== null) {
-        sidebarLinks[currentSectionIndex + 1].classList.add('active'); // +1 to skip the header link
+        sidebarLinks[currentSectionIndex + 1].classList.add('active'); // +1 to account for the first link being the header
       }
     });
   </script>
+  
 </body>
 
 </html>
