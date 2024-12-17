@@ -12,16 +12,13 @@ layout: home
 <style>
   
 img {
-  max-width: 100%;
-  position: relative; /* Ensure the 'left' property works */
-  left: 9%; /* Offset content by 18% to account for the sidebar */
-  padding: 20px;
-  width: 60%; /* Adjust width to account for the remaining space */
-  height: auto;
-  margin: 20px 0;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  .content img {
+  max-width: 100%; /* Scale the image within its container */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Ensure the image is treated as a block-level element */
+  margin: 20px auto; /* Vertically space and horizontally center */
+  padding: 20px; /* Add consistent padding */
+}
 }
 
 /* General Styles */
@@ -184,13 +181,11 @@ a:hover {
       <h2>Exploring the role of CDKs in Cell Proliferation</h2>
     </div>
 
-    <img src="assets\img\cancercells.jpg" alt="cancercellsimg">
+    <img src="assets/img/cancercells.jpg" alt="cancercellsimg">
 
     <!-- Introduction -->
     <div id="introduction" class="content-section">
-      <h1>Introduction</h1>
-      <h1>Understanding CDKs and Their Role in Cancer Research</h1>
-    
+  
     <p><strong>Globally, 1 in 6 people die from cancer.</strong> Despite the many differences between cancers, they all share a defining characteristic: <span class="highlight">uncontrolled cell proliferation</span>. But what exactly is cell proliferation?</p>
     
     <p>In healthy cells, division occurs through a process called mitosis, resulting in the production of two new cells. This process is carefully regulated through a series of biochemical reactions collectively known as the <strong>cell cycle</strong>. However, in cancer cells, this regulation fails, leading to an abnormally rapid and uncontrolled cell cycle. The result? A mass of proliferating cells, known as a tumor.</p>
