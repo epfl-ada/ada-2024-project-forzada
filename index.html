@@ -209,17 +209,16 @@ a:hover {
     
     <body2 style="font-family: 'Arial', sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;">
 
-      <div style="background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 30px; border-radius: 10px; width: 80%; max-width: 800px; display: flex; flex-direction: column; align-items: center;">
-        <h1 style="font-size: 2.5rem; color: #34495e; margin-bottom: 20px;">Levenshtein Distance Calculator</h1>
+      <div style="background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px; display: inline-flex; flex-direction: column; align-items: center;">
+        <h1 style="font-size: 1.5rem; color: #34495e; margin-bottom: 20px;">Levenshtein Distance Calculator</h1>
     
-        <div style="width: 100%; margin-bottom: 30px; display: flex; justify-content: space-between;">
-          <input type="text" id="string1" placeholder="Enter first string" oninput="calculateDistance()" style="width: 45%; padding: 10px; font-size: 1.1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; outline: none;">
-          <input type="text" id="string2" placeholder="Enter second string" oninput="calculateDistance()" style="width: 45%; padding: 10px; font-size: 1.1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; outline: none;">
+        <div style="width: auto; margin-bottom: 20px; display: flex; justify-content: space-between;">
+          <input type="text" id="string1" placeholder="Enter first string" oninput="calculateDistance()" style="width: 100%; max-width: 200px; padding: 10px; font-size: 1.1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; outline: none;">
+          <input type="text" id="string2" placeholder="Enter second string" oninput="calculateDistance()" style="width: 100%; max-width: 200px; padding: 10px; font-size: 1.1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; outline: none;">
         </div>
     
-        <div id="distance" style="font-size: 1.5rem; font-weight: bold; color: #e74c3c; margin-top: 20px;">Distance: 0</div>
+        <div id="distance" style="font-size: 1.5rem; font-weight: bold; color: #293a4c; margin-top: 15px;">Distance: 0</div>
     
-        <p style="font-size: 1rem; color: #7f8c8d; margin-top: 15px; text-align: center;">Start typing in both fields and see how similar the strings are. The distance will update instantly!</p>
       </div>
     
       <script>
@@ -262,7 +261,7 @@ a:hover {
       </script>
     
     </body2>
-   
+    
     <p>For instance, we hypothesize that CDKs with similar names, such as <strong>CDK2-CycA2</strong> and <strong>CDK2-G1/S-CycE1</strong>, may also have similar sequences and therefore belong to the same family. By analyzing the Levenshtein distance between these sequences, we can test this hypothesis and begin to group CDKs into meaningful families.</p>
 
     <img src="assets/img/levenshteinimage.png" alt="levdistance" class="centered-img" width="60%" height="auto">
