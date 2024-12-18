@@ -179,6 +179,24 @@ a:hover {
       <h2>Exploring the role of CDKs in Cell Proliferation</h2>
     </div>
 
+    <div id="introduction" class="content-section">
+
+      <br>
+
+      <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
+
+      <p>In healthy cells, division occurs through mitosis, producing two new cells. In cancer cells, however, the division becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells: the tumor.</p>
+
+      <p>Could we find a treatment to prevent the tumor? First let’s take a look at what drives normal cell division. Cells divide in a tightly regulated process known as the cell cycle. It consists of four distinct phases, each governed by specific enzymes, the cyclin-dependent kinases (CDKs). For instance, a CDK, when bound to a specific cyclin, forms an activated complex. This complex ensures the transition from a phase to another.</p>
+
+      <p>But in the case of cancers, the complex is overactivated!</p>
+
+      <p>It could be an idea to prevent this and cure cancers! Could we find an inhibitor?</p>
+
+      <p>This inhibitor could target the cyclin-dependent kinase and reduce its catalytic activity. The inactivated complex wouldn’t be able to ensure the phase switch anymore.</p>
+
+      <p>To find this amazing cure, it’s essential to start with applied data analysis.</p>
+    
     <img src="assets/img/ligandcdknetworkgraph.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <img src="assets/img/heatmapjulie.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
@@ -188,28 +206,14 @@ a:hover {
     <img src="assets/img/heatmap2cdks.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <div style="display: flex; justify-content: center; gap: 20px;">
-      <img src="assets/img/tanimoto1.png" alt="Tanimoto Similarity 1" style="width: 45%; height: auto;">
-      <img src="assets/img/tanimotothreshold.png" alt="Tanimoto Threshold" style="width: 45%; height: auto;">
+      <img src="assets/img/tanimoto1.png" alt="Tanimoto Similarity 1" style="width: 50%; height: auto;">
+      <img src="assets/img/tanimotothreshold.png" alt="Tanimoto Threshold" style="width: 50%; height: auto;">
     </div>
 
     <img src="assets/img/r2andrmse.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <!-- Introduction -->
-    <div id="introduction" class="content-section">
-
-    <br>
   
-    <p><strong>Globally, 1 in 6 people die from cancer.</strong> Despite the many differences between cancers, they all share a defining characteristic: <span class="highlight">uncontrolled cell proliferation</span>. But what exactly is cell proliferation?</p>
-    
-    <p>In healthy cells, division occurs through a process called mitosis, resulting in the production of two new cells. This process is carefully regulated through a series of biochemical reactions collectively known as the <strong>cell cycle</strong>. However, in cancer cells, this regulation fails, leading to an abnormally rapid and uncontrolled cell cycle. The result? A mass of proliferating cells, known as a tumor.</p>
-    
-    <p><strong>But what if we could disrupt this runaway cycle?</strong> What if we could halt cell proliferation in cancer patients and stop tumor growth?</p>
-    
-    <p>To explore this possibility, we need to take a closer look at the cell cycle. The cell cycle is divided into four distinct phases, each controlled by specific proteins. Among these, a class of enzymes called <span class="highlight">cyclin-dependent kinases (CDKs)</span> plays a central role. CDKs act as molecular switches, driving the cell through each phase of the cycle.</p>
-    
-    <p>For example, <strong>CDK2</strong>, when bound to its partner protein cyclin B, ensures the transition from the S phase (DNA synthesis) to the G2 phase (preparation for mitosis). This makes CDKs attractive targets for therapies aimed at slowing or stopping cell proliferation.</p>
-    
-    <p>Could we find <strong>inhibitors</strong> that bind to CDK-cyclin complexes and reduce their activity? If successful, such molecules could potentially disrupt the uncontrolled cell division characteristic of cancer.</p>
     
     <h2>Sorting CDKs by Families</h2>
     <p>To design effective inhibitors, we need to better understand CDKs by grouping them into <strong>families</strong>. CDKs with similar amino acid sequences are likely to have similar interaction profiles with their ligands. This means that a molecule designed to inhibit one CDK might also inhibit other members of the same family.</p>
@@ -221,61 +225,7 @@ a:hover {
     <p>One way to measure the similarity between CDK sequences is through the <strong>Levenshtein distance</strong>. This metric calculates the minimum number of single-character edits (insertions, deletions, or substitutions) needed to transform one sequence into another, like the demo shows. Essentially, the smaller the distance, the more similar the sequences.</p>
     
     <br>
-    <body2 style="font-family: 'Arial', sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: auto">
-
-      <div style="background-color: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px; display: inline-flex; flex-direction: column; align-items: center;">
-        <h1 style="font-size: 1.5rem; color: #34495e; margin-bottom: 20px;">Levenshtein Distance Calculator</h1>
     
-        <div style="width: auto; margin-bottom: 20px; display: flex; justify-content: space-between;">
-          <input type="text" id="string1" placeholder="Enter first string" oninput="calculateDistance()" style="width: 100%; max-width: 200px; padding: 10px; font-size: 1.1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; outline: none;">
-          <input type="text" id="string2" placeholder="Enter second string" oninput="calculateDistance()" style="width: 100%; max-width: 200px; padding: 10px; font-size: 1.1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; outline: none;">
-        </div>
-    
-        <div id="distance" style="font-size: 1.5rem; font-weight: bold; color: #293a4c; margin-top: 15px;">Distance: 0</div>
-    
-      </div>
-    
-      <script>
-        function calculateDistance() {
-          const str1 = document.getElementById('string1').value;
-          const str2 = document.getElementById('string2').value;
-          
-          const distance = getLevenshteinDistance(str1, str2);
-    
-          document.getElementById('distance').textContent = `Distance: ${distance}`;
-        }
-    
-        function getLevenshteinDistance(a, b) {
-          const tmp = [];
-          let i, j, alen = a.length, blen = b.length, cost;
-    
-          if (alen === 0) {
-            return blen;
-          }
-          if (blen === 0) {
-            return alen;
-          }
-    
-          for (i = 0; i <= alen; i++) {
-            tmp[i] = [i];
-          }
-          for (j = 0; j <= blen; j++) {
-            tmp[0][j] = j;
-          }
-    
-          for (i = 1; i <= alen; i++) {
-            for (j = 1; j <= blen; j++) {
-              cost = a[i - 1] === b[j - 1] ? 0 : 1;
-              tmp[i][j] = Math.min(tmp[i - 1][j] + 1, tmp[i][j - 1] + 1, tmp[i - 1][j - 1] + cost);
-            }
-          }
-    
-          return tmp[alen][blen];
-        }
-      </script>
-    
-    </body2>
-    <br>
     <p>For instance, we hypothesize that CDKs with similar names, such as <strong>CDK2-CycA2</strong> and <strong>CDK2-G1/S-CycE1</strong>, may also have similar sequences and therefore belong to the same family. By analyzing the Levenshtein distance between these sequences, we can test this hypothesis and begin to group CDKs into meaningful families.</p>
     <br>
     <img src="assets/img/levenshteinimage.png" alt="levdistance" class="centered-img" width="60%" height="auto">
