@@ -6,6 +6,8 @@ from Levenshtein import distance
 from typing import List
 from rdkit import Chem, DataStructs
 import matplotlib.colors as mcolors
+from sklearn.cluster import KMeans
+
 
 # Format the binding affinity value given
 def clean(binding_value, pattern=['<', '>']):
@@ -450,3 +452,16 @@ def summary_of_ligand_similarities(similarity_matrix):
     }
 
     return pd.Series(summary).T
+
+def plot_sse(distance_matrix, start=2, end=18):
+    sse = []
+    for k in range(start, end):
+        # Assign the labels to the clusters
+        kmeans = KMeans(n_clusters=k, random_state=10).fit(distance_matrix)
+        sse.append({"k": k, "sse": kmeans.inertia_})
+
+    sse = pd.DataFrame(sse)
+    # Plot the data
+    plt.plot(sse.k, sse.sse)
+    plt.xlabel("K")
+    plt.ylabel("Sum of Squared Errors")
