@@ -205,7 +205,28 @@ a:hover {
     
     <img src="assets/img/ligandcdknetworkgraph.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
+    <p>We can visualize all the CDKs as blue spheres and the ligands they interact with as orange dots. The grey lines connecting them indicate the availability of affinity measurements for each molecule pair. The more connections a particular CDK has, the larger the size of its corresponding blue sphere. From this plot, it is evident that our data is heterogeneous: we have abundant information for some CDKs, while considerably less is available for others.</p>
+
+    <p>Let’s study these interactions and let’s find a cure for cancer!</p>
+
+    <h1>CDKs: Can we sort them by families?</h1>
+
+    <p>To find potential inhibitors of CDKs functions, we first need to know more about these kinases. In our database, we have 30 different CDKs and for each, the amino-acid sequences of their chains. Are they all different enough that every potential ligand would bind differently to each CDK? Or do they have similarities that could allow us to classify them into families? Indeed, we can imagine that CDKs with similar sequences would have a similar interaction profile with their ligands. Admitting this hypothesis, we could conclude that ligands having a strong interaction with a given CDK would also have a significant interaction with CDKs of the same family.</p>
+
+    <p>Moreover, we could also make the hypothesis that CDKs with similar sequences (CDKs within the same family) have similar functions in the cell cycle. This assumption would allow us to find an inhibitor targeting several CDKs and therefore inhibiting a given step of the cell cycle.</p>
+
+    <p>The most obvious thing we could do to create these families, is to look at the amino acid sequences of the 30 CDKs.</p>
+
+    <p>To do so, we compare the amino acid sequences by aligning their conserved regions. This can be done by <strong>Multiple Sequence Alignment</strong>, a method biologically accurate, which inserts gaps into the sequences to align them correctly taking into account their evolutionary and structural homology.</p>
+
     <img src="assets/img/heatmapjulie.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+
+    <iframe 
+    src="assets/img/interactive_pca_plot_cool_colors.html" 
+    width="100%" 
+    height="auto" 
+    style="border: 0;">
+    </iframe>
 
     <img src="assets/img/heatmap.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
