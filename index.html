@@ -219,6 +219,8 @@ a:hover {
 
     <p>To do so, we compare the amino acid sequences by aligning their conserved regions. This can be done by <strong>Multiple Sequence Alignment</strong>, a method biologically accurate, which inserts gaps into the sequences to align them correctly taking into account their evolutionary and structural homology.</p>
 
+    <br>
+
     <img src="assets/img/heatmapjulie.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <iframe 
@@ -232,7 +234,11 @@ a:hover {
     
     <p>To achieve this, we classify the interaction strength between the ligands and their CDKs, using the IC50 values — the concentration of an inhibitor that reduces the enzymatic activity of the CDK by 50%. We qualitatively sort these values into 3 classes based on scientific literature: strong, moderate, and weak.</p>
     
+    <br>
+
     <img src="assets/img/heatmap.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+
+    <br>
 
     <p>The heatmap first confirms the heterogeneity of the data. Some ligands' interactions have been measured with only some CDKs but not all. Paradoxically, some of the CDKs show homogeneous data: only strong interaction or only weak interaction, for instance.</p>
   
@@ -240,17 +246,45 @@ a:hover {
   
     <p>Do CDKs of the same family have a similar interaction profile with their ligands? Let’s compare two CDKs and assess the similarity.</p>
   
+    <br>
+    
     <img src="assets/img/heatmap2cdks.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
     
+    <br>
+
     <p>This map reveals that the 2 interaction arrays are <strong>86.07%</strong> similar! This supports our hypothesis that CDKs within the same family can exhibit similar interaction profiles. Consequently, a specific ligand may potentially bind with comparable strength to multiple CDKs belonging to that family.</p>
   
     <p>Now that we studied the targets for our potential drug against cancer, let's focus on the inhibitor itself: the ligand.</p>
+
+    <p>The only information we have on the ligands' nature is their SMILES giving structural information about the molecule. We aim to determine whether ligands with high affinity for a CDK share common structural features. Identifying such patterns would significantly advance our progress in developing an effective inhibitor.</p>
+    
+    <p>To investigate similarities between SMILES's ligands, we compare their Tanimoto similarity coefficients. You will find more about Tanimoto following this link. Here are two plots showing the SMILES similarities between ligands that bind strongly to CDK2.</p>
+  
+    <br>
 
     <div style="display: flex; justify-content: center; gap: 20px;">
       <img src="assets/img/tanimoto1.png" alt="Tanimoto Similarity 1" style="width: 50%; height: auto;">
       <img src="assets/img/tanimotothreshold.png" alt="Tanimoto Threshold" style="width: 50%; height: auto;">
     </div>
+    
+    <br>
 
+    <p>We can qualitatively see a very low similarity; only 2.43% of the ligands are more than 85% similar in structure. Unfortunately, comparing all the ligands as a control gives us a close value of similarity of 2.18%. We can therefore not admit that there are more similarities in the SMILES of ligands having the same types of interaction.</p>
+  
+    <p>We can conclude that it is not significant enough to consider the SMILES similarities as a criterion to conclude on the inhibition property of the ligand.</p>
+
+    <p>In order to find a potential inhibitor for the CDKs, we want to build a prediction model which would give us the affinity of a random molecule with a given CDK. For this purpose we have constructed a QSAR model based on linear regression. In short the model takes the SMILES of a ligand, vectorizes it and makes use of these vectorizations as features (X) with the dependent variable being the IC50 values (Y).</p>
+    
+    <p>A model is created for each CDK. Let’s compare one of these models with a shuffled model to see if it is performing better.</p>
+
+    <br>
+
+    <img src="assets/img/comparisonshuffledvsnormal.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+    
+    <br>
+
+    <p>Amazing we have created a model that can predict affinity scores of a ligand on a specific protein! But how good our models are at predicting. Let’s look closer to their R2 values.</p>
+    
     <img src="assets/img/r2andrmse.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <!-- Introduction -->
