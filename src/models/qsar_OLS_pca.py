@@ -10,7 +10,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from src.models.helper_functions_qsar import *
 
-
 # Define reusable preprocessing tools
 scaler_cdk = StandardScaler()
 pca = PCA(n_components=0.95)
