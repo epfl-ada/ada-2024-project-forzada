@@ -223,14 +223,28 @@ a:hover {
 
     <iframe 
     src="assets/img/interactive_pca_plot_cool_colors.html" 
-    width="100%" 
-    height="auto" 
-    style="border: 0;">
+    style="position: relative; z-index: 100000000; width: 100%; height: 100vh; border: 0; overflow: hidden;">
     </iframe>
 
+    <h1>How do the CDKs bind to their ligands?</h1>
+    
+    <p>By studying the interactions between ligands and CDKs, we are interested in finding ligands inhibiting the CDKs strongly.</p>
+    
+    <p>To achieve this, we classify the interaction strength between the ligands and their CDKs, using the IC50 values — the concentration of an inhibitor that reduces the enzymatic activity of the CDK by 50%. We qualitatively sort these values into 3 classes based on scientific literature: strong, moderate, and weak.</p>
+    
     <img src="assets/img/heatmap.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
+    <p>The heatmap first confirms the heterogeneity of the data. Some ligands' interactions have been measured with only some CDKs but not all. Paradoxically, some of the CDKs show homogeneous data: only strong interaction or only weak interaction, for instance.</p>
+  
+    <p>Therefore, in some cases, it will not be possible to compare the ligand/CDKs interactions. But let’s look into the interaction profiles of CDKs with similar data.</p>
+  
+    <p>Do CDKs of the same family have a similar interaction profile with their ligands? Let’s compare two CDKs and assess the similarity.</p>
+  
     <img src="assets/img/heatmap2cdks.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+    
+    <p>This map reveals that the 2 interaction arrays are <strong>86.07%</strong> similar! This supports our hypothesis that CDKs within the same family can exhibit similar interaction profiles. Consequently, a specific ligand may potentially bind with comparable strength to multiple CDKs belonging to that family.</p>
+  
+    <p>Now that we studied the targets for our potential drug against cancer, let's focus on the inhibitor itself: the ligand.</p>
 
     <div style="display: flex; justify-content: center; gap: 20px;">
       <img src="assets/img/tanimoto1.png" alt="Tanimoto Similarity 1" style="width: 50%; height: auto;">
