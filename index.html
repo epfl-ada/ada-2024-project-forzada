@@ -38,6 +38,12 @@ h2 {
   margin-bottom: 20px;
 }
 
+h3 {
+  text-align: center;
+  font-size: 1.75rem;
+  margin-bottom: 20px;
+}
+
 p {
   margin: 10px 0;
 }
@@ -153,7 +159,7 @@ a:hover {
   <!-- Sidebar -->
   <div class="sidenav">
     <a href="#introduction">Introduction</a>
-    <a href="#cell-cycle">Cell Cycle Overview</a>
+    <a href="#sortfamilies">Sorting by families</a>
     <div class="submenu">
       <a href="#enzymes">enzymes</a>
       <a href="#disruption">disruption</a>
@@ -179,8 +185,6 @@ a:hover {
       <h2>Exploring the role of CDKs in Cell Proliferation</h2>
     </div>
 
-    <div id="introduction" class="content-section">
-
     <br>
 
     <video style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" controls>
@@ -190,11 +194,12 @@ a:hover {
 
     <br>
 
-    <h2>Research question</h2>
-
-    <p>To find this amazing cure, it’s essential to start with applied data analysis.</p>
+    <h3>Research question</h3>
 
     <p><strong>Could we find potential inhibitors of CDKs?</strong></p>
+
+    <div id="introduction" class="content-section">
+    <h1>Introduction</h1>
 
     <p>To answer this research question, we found interaction measures between CDKs and many different ligands and, more precisely, ligands that might inhibit CDKs.</p>
   
@@ -203,7 +208,9 @@ a:hover {
     <p>We can visualize all the CDKs as blue spheres and the ligands they interact with as orange dots. The grey lines connecting them indicate the availability of affinity measurements for each molecule pair. The more connections a particular CDK has, the larger the size of its corresponding blue sphere. From this plot, it is evident that our data is heterogeneous: we have abundant information for some CDKs, while considerably less is available for others.</p>
 
     <p>Let’s study these interactions and let’s find a cure for cancer!</p>
+    </div>
 
+    <div id="sortfamilies" class="content-section">
     <h1>CDKs: Can we sort them by families?</h1>
 
     <p>To find potential inhibitors of CDKs functions, we first need to know more about these kinases. In our database, we have 30 different CDKs and for each, the amino-acid sequences of their chains. Are they all different enough that every potential ligand would bind differently to each CDK? Or do they have similarities that could allow us to classify them into families? Indeed, we can imagine that CDKs with similar sequences would have a similar interaction profile with their ligands. Admitting this hypothesis, we could conclude that ligands having a strong interaction with a given CDK would also have a significant interaction with CDKs of the same family.</p>
@@ -222,6 +229,7 @@ a:hover {
     src="assets/img/interactive_pca_plot_cool_colors.html" 
     style="position: relative; z-index: 100000000; width: 100%; height: 100vh; border: 0; overflow: hidden;">
     </iframe>
+    </div>
 
     <h1>How do the CDKs bind to their ligands?</h1>
     
@@ -326,99 +334,6 @@ a:hover {
     
     <p>Now, let's meet in the lab to experimentally test the effect of these inhibitors, potential new drugs for cancer. Who knows, this molecule might become one of the drugs in the next clinical trials against cancer!</p>
 
-    <!-- Introduction -->
-  
-    
-    <h2>Sorting CDKs by Families</h2>
-    <p>To design effective inhibitors, we need to better understand CDKs by grouping them into <strong>families</strong>. CDKs with similar amino acid sequences are likely to have similar interaction profiles with their ligands. This means that a molecule designed to inhibit one CDK might also inhibit other members of the same family.</p>
-    
-    <p>Additionally, CDKs within the same family may share similar functions in the cell cycle. This insight could guide the development of inhibitors capable of targeting multiple CDKs, effectively shutting down key steps in cell cycle progression.</p>
-    
-    <p>The most straightforward way to group CDKs into families is by analyzing their <strong>amino acid sequences</strong>. By comparing these sequences, we can determine which CDKs are closely related and which are distinct.</p>
-    
-    <p>One way to measure the similarity between CDK sequences is through the <strong>Levenshtein distance</strong>. This metric calculates the minimum number of single-character edits (insertions, deletions, or substitutions) needed to transform one sequence into another, like the demo shows. Essentially, the smaller the distance, the more similar the sequences.</p>
-    
-    <br>
-    
-    <p>For instance, we hypothesize that CDKs with similar names, such as <strong>CDK2-CycA2</strong> and <strong>CDK2-G1/S-CycE1</strong>, may also have similar sequences and therefore belong to the same family. By analyzing the Levenshtein distance between these sequences, we can test this hypothesis and begin to group CDKs into meaningful families.</p>
-    <br>
-    <img src="assets/img/levenshteinimage.png" alt="levdistance" class="centered-img" width="60%" height="auto">
-    
-    <!-- Cell Cycle Overview -->
-    <div id="cell-cycle" class="content-section">
-      <h2>Cell Cycle Overview</h2>
-      <p>The cell cycle consists of four distinct phases, each governed by specific enzymes. The main ones are the <strong>cyclin-dependent kinases (CDKs)</strong>. For example, CDK2, when bound to cyclin B, ensures the transition from the S phase to the G2 phase of the cycle.</p>
-    </div>
-
-    <!-- CDKs and Cyclins -->
-    <div id="enzymes" class="content-section">
-      <h3>enzymes</h3>
-      <p>CDKs are critical regulators of the cell cycle. Disrupting the CDK/cyclin complex can potentially halt uncontrolled proliferation.</p>
-    </div>
-
-    <div id="disruption" class="content-section">
-      <h1>disruption</h1>
-      <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
-
-      <p>In healthy cells, division occurs through mitosis, producing two new cells in a tightly regulated process known as the cell cycle. This cycle involves a series of intricate biochemical reactions. In cancer cells, however, the cell cycle becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells known as a tumor.</p>
-        
-      <p>But what if we could disrupt this cycle and halt cell proliferation in cancer patients?</p>
-        
-      <p>To explore this possibility, we need to delve deeper into the cell cycle. It consists of four distinct phases, each governed by specific enzymes, the main ones being the cyclin-dependent kinases (CDKs). For instance, CDK2, when bound to cyclin B, activates it and ensures the transition from the S phase to the G2 phase of the cycle.</p>
-        
-      <p>Could we find inhibitors that could target the CDKs/cyclin complex and therefore reduce the catalytic activity of  involved in this anarchic cell proliferation? Find molecules that could bind to a CDKs, therefore reducing its catalytic activity.</p>
-    </div>
-
-    <!-- Research Question -->
-    <div id="research-question" class="content-section">
-      <h2>Research Question</h2>
-      <p>Could we find potential inhibitors of CDK activity from new ligands using BindingDB?</p>
-    </div>
-
-    <div id="study-cdks" class="content-section">
-      <h1>study-cdks</h1>
-      <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
-
-      <p>In healthy cells, division occurs through mitosis, producing two new cells in a tightly regulated process known as the cell cycle. This cycle involves a series of intricate biochemical reactions. In cancer cells, however, the cell cycle becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells known as a tumor.</p>
-        
-      <p>But what if we could disrupt this cycle and halt cell proliferation in cancer patients?</p>
-        
-      <p>To explore this possibility, we need to delve deeper into the cell cycle. It consists of four distinct phases, each governed by specific enzymes, the main ones being the cyclin-dependent kinases (CDKs). For instance, CDK2, when bound to cyclin B, activates it and ensures the transition from the S phase to the G2 phase of the cycle.</p>
-        
-      <p>Could we find inhibitors that could target the CDKs/cyclin complex and therefore reduce the catalytic activity of  involved in this anarchic cell proliferation? Find molecules that could bind to a CDKs, therefore reducing its catalytic activity.</p>
-    </div>
-
-    <div id="dna-sequence" class="content-section">
-      <h1>dna-sequence</h1>
-      <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
-
-      <p>In healthy cells, division occurs through mitosis, producing two new cells in a tightly regulated process known as the cell cycle. This cycle involves a series of intricate biochemical reactions. In cancer cells, however, the cell cycle becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells known as a tumor.</p>
-        
-      <p>But what if we could disrupt this cycle and halt cell proliferation in cancer patients?</p>
-        
-      <p>To explore this possibility, we need to delve deeper into the cell cycle. It consists of four distinct phases, each governed by specific enzymes, the main ones being the cyclin-dependent kinases (CDKs). For instance, CDK2, when bound to cyclin B, activates it and ensures the transition from the S phase to the G2 phase of the cycle.</p>
-        
-      <p>Could we find inhibitors that could target the CDKs/cyclin complex and therefore reduce the catalytic activity of  involved in this anarchic cell proliferation? Find molecules that could bind to a CDKs, therefore reducing its catalytic activity.</p>
-    </div>
-
-    <div id="visual-rep" class="content-section">
-      <h1>visual-rep</h1>
-      <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
-
-      <p>In healthy cells, division occurs through mitosis, producing two new cells in a tightly regulated process known as the cell cycle. This cycle involves a series of intricate biochemical reactions. In cancer cells, however, the cell cycle becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells known as a tumor.</p>
-        
-      <p>But what if we could disrupt this cycle and halt cell proliferation in cancer patients?</p>
-        
-      <p>To explore this possibility, we need to delve deeper into the cell cycle. It consists of four distinct phases, each governed by specific enzymes, the main ones being the cyclin-dependent kinases (CDKs). For instance, CDK2, when bound to cyclin B, activates it and ensures the transition from the S phase to the G2 phase of the cycle.</p>
-        
-      <p>Could we find inhibitors that could target the CDKs/cyclin complex and therefore reduce the catalytic activity of  involved in this anarchic cell proliferation? Find molecules that could bind to a CDKs, therefore reducing its catalytic activity.</p>
-    </div>
-
-    <!-- Ligands -->
-    <div id="study-ligands" class="content-section">
-      <h2>Study of Ligands</h2>
-      <p>We now study the ligands that bind to CDKs. Do ligands with high affinity share structural patterns?</p>
-    </div>
   </div>
   <script>
     // Highlight the section most near the top of the viewport
