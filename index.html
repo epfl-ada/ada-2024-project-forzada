@@ -18,7 +18,7 @@ body {
   padding: 0;
   line-height: 1.6;
   color: #333;
-  background-color: #d0d0d0;
+  background-color: #F5F5F3;
 }
 
 h1, h2, h3 {
@@ -65,11 +65,11 @@ a:hover {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #2c3e50;
+    background-color: #5F494E;
     overflow-x: hidden;
     padding-top: 40px; /* Adjust top padding for margin */
     z-index: 100000;
-    color: #ecf0f1;
+    color: #F5F5F3;
 }
 
 .sidenav .header {
@@ -83,14 +83,14 @@ a:hover {
 .sidenav a {
   padding: 10px 20px;
   display: block;
-  color: #ecf0f1;
+  color: #F5F5F3;
   transition: 0.3s;
 }
 
 .sidenav a:hover,
 .sidenav a.active {
-  background-color: #34495e;
-  color: #f1c40f;
+  background-color: #6c585d;
+  color: #c8c8c8;
   padding-left: 25px;
 }
 
@@ -159,9 +159,9 @@ a:hover {
   <!-- Sidebar -->
   <div class="sidenav">
     <a href="#introduction">Introduction</a>
-    <a href="#sortfamilies">Sorting by families</a>
-    <a href="#ligands">Ligand interactions</a>
-    <a href="#smiles">SMILES</a>
+    <a href="#sortfamilies">CDKs families</a>
+    <a href="#ligands">CDKs/Ligands interactions</a>
+    <a href="#smiles">SMILES' ligands</a>
     <a href="#predictionmodel">Prediction model</a>
     <div class="submenu">
       <a href="#singlemodel">Single protein model</a>
@@ -174,16 +174,20 @@ a:hover {
   <div class="content">
     <!-- Title Section -->
     <div class="title-container">
-      <h1>Everyone wants to find a cure for cancer</h1>
-      <h2>Exploring the role of CDKs in Cell Proliferation</h2>
+      <h0>Shutting Down the Cell Cycle: Potential of CDK Inhibitors in Cancer treatment</h0>
     </div>
 
     <br>
 
-    <video style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" controls>
-      <source src="assets/img/introvideoada.MP4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <figure style="text-align: center;">
+      <video style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" controls>
+        <source src="assets/img/introvideoada.MP4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <figcaption style="margin-top: 8px; font-size: 16px; color: #555;">
+        Biology For Dummies:  A brief biological explanation with the voice of Mathilde Roulleau, produced by Forzada 
+      </figcaption>
+    </figure>
 
     <br>
 
@@ -194,12 +198,11 @@ a:hover {
     <div id="introduction" class="content-section">
     <h1>Introduction</h1>
 
-    <p>To answer this research question, we found interaction measures between CDKs and many different ligands and, more precisely, ligands that might inhibit CDKs.</p>
+    <p>To answer this research question, we utilized a preprocessed version of the BindingDB dataset and we found interaction measures between CDKs and many different ligands and more precisely, ligands that might inhibit CDKs.</p>
   
     <img src="assets/img/ligandcdknetworkgraph.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <p>We can visualize all the CDKs as blue spheres and the ligands they interact with as orange dots. The grey lines connecting them indicate the availability of affinity measurements for each molecule pair. The more connections a particular CDK has, the larger the size of its corresponding blue sphere. From this plot, it is evident that our data is heterogeneous: we have abundant information for some CDKs, while considerably less is available for others.</p>
-
     <p>Let’s study these interactions and let’s find a cure for cancer!</p>
     </div>
 
@@ -208,15 +211,21 @@ a:hover {
 
     <p>To find potential inhibitors of CDKs functions, we first need to know more about these kinases. In our database, we have 30 different CDKs and for each, the amino-acid sequences of their chains. Are they all different enough that every potential ligand would bind differently to each CDK? Or do they have similarities that could allow us to classify them into families? Indeed, we can imagine that CDKs with similar sequences would have a similar interaction profile with their ligands. Admitting this hypothesis, we could conclude that ligands having a strong interaction with a given CDK would also have a significant interaction with CDKs of the same family.</p>
 
-    <p>Moreover, we could also make the hypothesis that CDKs with similar sequences (CDKs within the same family) have similar functions in the cell cycle. This assumption would allow us to find an inhibitor targeting several CDKs and therefore inhibiting a given step of the cell cycle.</p>
+    <p>Moreover, we could also make the hypothesis that CDKs with similar sequences (CDKs within a same family) have similar functions in the cell cycle. This assumption would allow us to find an inhibitor targeting several CDKs and therefore inhibiting a given step of the cell cycle.</p>
 
     <p>The most obvious thing we could do to create these families, is to look at the amino acid sequences of the 30 CDKs.</p>
 
-    <p>To do so, we compare the amino acid sequences by aligning their conserved regions. This can be done by <strong>Multiple Sequence Alignment</strong>, a method biologically accurate, which inserts gaps into the sequences to align them correctly taking into account their evolutionary and structural homology.</p>
+    <p>To do so, we compare the amino acid sequences by aligning their conserved regions. This can be done by Multiple sequence alignment, a method biologically accurate, which inserts gaps into the sequences to align them correctly taking into account their evolutionary and structural homology.</p>
 
     <br>
 
     <img src="assets/img/heatmapjulie.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+
+    <br>
+
+    <p>From this plot and using these similarity results, could we sort the CDKs into families?</p>
+
+    <br>
 
     <iframe 
     src="assets/img/interactive_pca_plot_cool_colors.html" 
@@ -224,12 +233,17 @@ a:hover {
     </iframe>
     </div>
 
+    <br>
+
+    <p>We obtain 5 families of CDKs that we can now use to study the CDKs-Ligands interaction!</p>
+
+
     <div id="ligands" class="content-section">
     <h1>How do the CDKs bind to their ligands?</h1>
     
-    <p>By studying the interactions between ligands and CDKs, we are interested in finding ligands inhibiting the CDKs strongly.</p>
+    <p>By studying the interactions between ligands and CDKs, we are interested in finding ligands inhibiting the CDKs strongly. </p>
     
-    <p>To achieve this, we classify the interaction strength between the ligands and their CDKs, using the IC50 values — the concentration of an inhibitor that reduces the enzymatic activity of the CDK by 50%. We qualitatively sort these values into 3 classes based on scientific literature: strong, moderate, and weak.</p>
+    <p>To achieve this, we classify the interaction strength between the ligands and their CDKs, using the IC50 values- the concentration of an inhibitor that reduces the enzymatic  activity of the CDK by 50%. We qualitatively sort these values into 3 classes: strong, moderate and weak.</p>    
     
     <br>
 
@@ -237,11 +251,9 @@ a:hover {
 
     <br>
 
-    <p>The heatmap first confirms the heterogeneity of the data. Some ligands' interactions have been measured with only some CDKs but not all. Paradoxically, some of the CDKs show homogeneous data: only strong interaction or only weak interaction, for instance.</p>
-  
-    <p>Therefore, in some cases, it will not be possible to compare the ligand/CDKs interactions. But let’s look into the interaction profiles of CDKs with similar data.</p>
-  
-    <p>Do CDKs of the same family have a similar interaction profile with their ligands? Let’s compare two CDKs and assess the similarity.</p>
+    <p>The heatmap first confirms the heterogeneity of the data. Some ligands' interactions have been measured with only some CDKs but not all. And paradoxically, some of the CDKs show homogeneous data: only strong interaction or only weak interaction for instance. Therefore, in some cases, it will not be possible to compare the ligand/CDKs interactions. But let’s look into the interaction profiles of CDKs with similar data.</p>
+        
+    <p>Do CDKs of the same family have a similar interaction profile with their ligands? Let’s compare two CDKs and assess their similarity.</p>
   
     <br>
     
@@ -249,7 +261,7 @@ a:hover {
     
     <br>
 
-    <p>This map reveals that the 2 interaction arrays are <strong>86.07%</strong> similar! This supports our hypothesis that CDKs within the same family can exhibit similar interaction profiles. Consequently, a specific ligand may potentially bind with comparable strength to multiple CDKs belonging to that family.</p>
+    <p>This map reveals that the 2 interaction arrays are 86.07% (depending on the one you chose) similar! This supports our hypothesis that CDKs within the same family can exhibit similar interaction profiles. Consequently, a specific ligand may potentially bind with comparable strength to multiple CDKs belonging to that family.</p>
   
     <p>Now that we studied the targets for our potential drug against cancer, let's focus on the inhibitor itself: the ligand.</p>
     </div>
@@ -257,7 +269,7 @@ a:hover {
     <div id="smiles" class="content-section">
     <p>The only information we have on the ligands' nature is their SMILES giving structural information about the molecule. We aim to determine whether ligands with high affinity for a CDK share common structural features. Identifying such patterns would significantly advance our progress in developing an effective inhibitor.</p>
     
-    <p>To investigate similarities between SMILES's ligands, we compare their Tanimoto similarity coefficients. You will find more about Tanimoto following this link. Here are two plots showing the SMILES similarities between ligands that bind strongly to CDK2.</p>
+    <p>To investigate similarities between SMILES's ligands, we compare their Tanimoto similarity coefficients.You will find more about Tanimoto following this <a href="https://www.rdkit.org/docs/GettingStartedInPython.html" target="_blank" style="color: #007bff; text-decoration: underline;">this link</a>. Here are two plots showing the SMILES similarities between ligands that bind strongly to CDK2.</p>
   
     <br>
 
@@ -270,16 +282,18 @@ a:hover {
 
     <p>We can qualitatively see a very low similarity; only 2.43% of the ligands are more than 85% similar in structure. Unfortunately, comparing all the ligands as a control gives us a close value of similarity of 2.18%. We can therefore not admit that there are more similarities in the SMILES of ligands having the same types of interaction.</p>
   
-    <p>We can conclude that it is not significant enough to consider the SMILES similarities as a criterion to conclude on the inhibition property of the ligand.</p>
+    <p>We conclude that it is not significant enough to consider the SMILES similarities as a criteria to conclude on the inhibition property of the ligand.</p>
     </div>
 
     <div id="predictionmodel" class="content-section">
-    <p>In order to find a potential inhibitor for the CDKs, we want to build a prediction model which would give us the affinity of a random molecule with a given CDK. For this purpose we have constructed a QSAR model based on linear regression. In short the model takes the SMILES of a ligand, vectorizes it and makes use of these vectorizations as features (X) with the dependent variable being the IC50 values (Y).</p>
+    <h1>CDKs/ligands affinity: designing a prediction model</h1>
+
+    <p>In order to find a potential inhibitor for the CDKs, we want to build a prediction model which would give us the affinity of an input molecule with a given CDK. For this purpose we construct a QSAR model based on linear regression. In short the model takes the SMILES of a ligand, vectorizes it and makes use of these vectorizations as features (X) with the dependent variable being the IC50 values (Y).</p>
     
     <div id="singlemodel" class="content-section">
     <h2>Single Protein Model</h2>
 
-    <p>A model is created for each CDK. Let’s compare one of these models with a shuffled model to see if it is performing better.</p>
+    <p>A unique model is created for each CDK. Let’s see if our models perform better than a random shuffled model. Here we will see one model on the CDK2:</p>
 
     <br>
 
@@ -287,11 +301,15 @@ a:hover {
     
     <br>
 
-    <p>Amazing we have created a model that can predict affinity scores of a ligand on a specific protein! But how good our models are at predicting. Let’s look closer to their R2 values.</p>
+    <p>Amazing, we have created a model that can predict affinity scores of a ligand on a specific protein! But how good our models are at predicting? Let’s look closer to their R2 and RMSE values.</p>
     
+    <br>
+
     <img src="assets/img/r2andrmse.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
-    <p>As we can see the different models show a good potential for predicting the binding affinity of a ligand! However, some of the CDKs models like CDK2 have very high R2 values but low RMSE values on the training set, meaning it is likely that they overfit, resulting in poorer predictive performance. The R2 values are nonetheless in the range [0.5:0.95], an ideal range to explain the variability of the data, encouraging us to use these models anyway.</p>
+    <p>As we can see the different models show a good potential for predicting the binding affinity of a ligand!</p>
+
+    <p>However, some of the CDKs models like CDK2 have very high R2 values but low RMSE values on the training set, meaning it is likely that they overfit, resulting in poorer predictive performance. The R2 values are nonetheless in the range [0.5:0.95], an ideal range to explain the variability of the data, encouraging us to use these models anyway.</p>
     
     <p>For the specific CDK, CDK2-G1/S-CycE1, we can see that the model is performing well. So let us now try and predict the binding affinity of a 1000 random ligands to this protein.</p>
 
@@ -314,8 +332,9 @@ a:hover {
     
     <img src="assets/img/shuffledoriginal2.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
     
-    <p>The models now predict the binding affinity of a ligand to a family of proteins. This is amazing! Now that the models are built, let’s predict the affinity of some random molecules from our data, to one of the families.</p>
-    
+    <p>The models now predict the binding affinity of a ligand to a family of proteins. This is amazing! 
+      Now that the models are built, let’s predict the affinity of some random molecules from our data, to one of the families.</p>
+          
     <iframe 
     src="assets/img/2log_histogram.html" 
     style="position: relative; z-index: 100000000; width: 100%; height: 100vh; border: 0; overflow: hidden;">
@@ -325,18 +344,19 @@ a:hover {
     
     <p>From the results of these 2 models (Single protein and Family proteins models), what are the best inhibitors that we discovered?</p>
     
-    <p>Below are the molecular structures of the two best inhibitors targeting respectively a given family (family 1, mainly composed of CDK2 variants) and a specific CDK (CDK2-G1/S-CycE1), obtained with our models!</p>
+    <p>Below are the molecular structures of the two best inhibitors targeting respectively a given family (family 1, mainly composed of CDK2 variants) and a specific CDK (CDK2-G1/S-CycE1), obtained with our models! </p>
     
     <img src="assets/img/winners.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
     </div>
     </div>
 
+    <br>
+
     <div id="conclusion" class="content-section">
     <h1>Conclusion</h1>
     
-    <p>At the end of this project, we have been able to build a model to predict the affinity of a molecule with specific CDKs or families of CDKs. Notably, we identified a potential inhibitor targeting a family of CDKs in which some (CDK2s) ensure a phase switch in the cell cycle.</p>
-    
-    <p>By preventing this transition, the inhibitor has the potential to interrupt cell division and halt uncontrolled cell proliferation, aligning perfectly with the objective of our investigation.</p>
+    <p>At the end of this project, we have been able to build a model to predict the affinity of a molecule with specific CDKs or families of CDKs. Notably, we identified a potential inhibitor targeting a family of CDKs in which some (CDK2s) ensure a phase switch in the cell cycle. 
+      By preventing this transition, the inhibitor has the potential to interrupt cell division and halt uncontrolled cell proliferation, aligning perfectly with the objective of our investigation.</p>
     
     <p>Now, let's meet in the lab to experimentally test the effect of these inhibitors, potential new drugs for cancer. Who knows, this molecule might become one of the drugs in the next clinical trials against cancer!</p>
     </div>
