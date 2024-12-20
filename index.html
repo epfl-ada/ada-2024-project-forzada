@@ -181,33 +181,35 @@ a:hover {
 
     <div id="introduction" class="content-section">
 
-      <br>
+    <br>
 
-      <video style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" controls>
-        <source src="assets/img/introvideoada.MP4" type="video/mp4">
-        Your browser does not support the video tag.
+    <video style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" controls>
+      <source src="assets/img/introvideoada.MP4" type="video/mp4">
+      Your browser does not support the video tag.
     </video>
 
-      <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
+    <br>
 
-      <p>In healthy cells, division occurs through mitosis, producing two new cells. In cancer cells, however, the division becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells: the tumor.</p>
+    <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
 
-      <p>Could we find a treatment to prevent the tumor? First let’s take a look at what drives normal cell division. Cells divide in a tightly regulated process known as the cell cycle. It consists of four distinct phases, each governed by specific enzymes, the cyclin-dependent kinases (CDKs). For instance, a CDK, when bound to a specific cyclin, forms an activated complex. This complex ensures the transition from a phase to another.</p>
+    <p>In healthy cells, division occurs through mitosis, producing two new cells. In cancer cells, however, the division becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells: the tumor.</p>
 
-      <p>But in the case of cancers, the complex is overactivated!</p>
+    <p>Could we find a treatment to prevent the tumor? First let’s take a look at what drives normal cell division. Cells divide in a tightly regulated process known as the cell cycle. It consists of four distinct phases, each governed by specific enzymes, the cyclin-dependent kinases (CDKs). For instance, a CDK, when bound to a specific cyclin, forms an activated complex. This complex ensures the transition from a phase to another.</p>
 
-      <p>It could be an idea to prevent this and cure cancers! Could we find an inhibitor?</p>
+    <p>But in the case of cancers, the complex is overactivated!</p>
 
-      <p>This inhibitor could target the cyclin-dependent kinase and reduce its catalytic activity. The inactivated complex wouldn’t be able to ensure the phase switch anymore.</p>
+    <p>It could be an idea to prevent this and cure cancers! Could we find an inhibitor?</p>
 
-      <h2>Research question</h2>
+    <p>This inhibitor could target the cyclin-dependent kinase and reduce its catalytic activity. The inactivated complex wouldn’t be able to ensure the phase switch anymore.</p>
 
-      <p>To find this amazing cure, it’s essential to start with applied data analysis.</p>
+    <h2>Research question</h2>
 
-      <p><strong>Could we find potential inhibitors of CDKs?</strong></p>
+    <p>To find this amazing cure, it’s essential to start with applied data analysis.</p>
 
-      <p>To answer this research question, we found interaction measures between CDKs and many different ligands and, more precisely, ligands that might inhibit CDKs.</p>
-    
+    <p><strong>Could we find potential inhibitors of CDKs?</strong></p>
+
+    <p>To answer this research question, we found interaction measures between CDKs and many different ligands and, more precisely, ligands that might inhibit CDKs.</p>
+  
     <img src="assets/img/ligandcdknetworkgraph.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <p>We can visualize all the CDKs as blue spheres and the ligands they interact with as orange dots. The grey lines connecting them indicate the availability of affinity measurements for each molecule pair. The more connections a particular CDK has, the larger the size of its corresponding blue sphere. From this plot, it is evident that our data is heterogeneous: we have abundant information for some CDKs, while considerably less is available for others.</p>
@@ -291,6 +293,44 @@ a:hover {
     <p>Amazing we have created a model that can predict affinity scores of a ligand on a specific protein! But how good our models are at predicting. Let’s look closer to their R2 values.</p>
     
     <img src="assets/img/r2andrmse.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+
+    <p>As we can see the different models show a good potential for predicting the binding affinity of a ligand! However, some of the CDKs models like CDK2 have very high R2 values but low RMSE values on the training set, meaning it is likely that they overfit, resulting in poorer predictive performance. The R2 values are nonetheless in the range [0.5:0.95], an ideal range to explain the variability of the data, encouraging us to use these models anyway.</p>
+    
+    <p>For the specific CDK, CDK2-G1/S-CycE1, we can see that the model is performing well. So let us now try and predict the binding affinity of a 1000 random ligands to this protein.</p>
+
+
+    
+    <p>Our model seems to perform reasonably for these ligands. It predicts low values of IC50, allowing us to isolate potential strong inhibitors against the CDK.</p>
+    
+    <p>Here we used a model for CDK2 and we predict that the CDK will have a very high binding affinity (low IC50) with some ligands. Our model tells us it is very likely that we found a great inhibitor!</p>
+
+    <h2>Proteins of a family model</h2>
+    
+    <p>Based on the CDKs sequence alignment research we discovered that it was possible to cluster the proteins into 5 different families. Based on the assumption that if proteins have a similar structure to a high degree, their binding affinity to a ligand should be somewhat similar. This approach could be effective to discover ligands that may bind well to multiple proteins in the same family. Hence, further prevent development of the cancer cell.</p>
+    
+    <p>We use our model on several families of CDKs. In the visual representation of the results, we choose to show a specific family which is composed of a lot of CDK2 known to ensure the switch between phases G1 and S of the cell cycle.</p>
+    
+    
+    
+    <p>The models now predict the binding affinity of a ligand to a family of proteins. This is amazing! Now that the models are built, let’s predict the affinity of some random molecules from our data, to one of the families.</p>
+    
+    
+    
+    <p>The prediction gives us that this CDK family will have a very high binding affinity (low IC50) with some ligands. Our model tells us it is very likely that we found a great inhibitor!</p>
+    
+    <p>From the results of these 2 models (Single protein and Family proteins models), what are the best inhibitors that we discovered?</p>
+    
+    <p>Below are the molecular structures of the two best inhibitors targeting respectively a given family (family 1, mainly composed of CDK2 variants) and a specific CDK (CDK2-G1/S-CycE1), obtained with our models!</p>
+    
+
+
+    <h2>Conclusion</h2>
+    
+    <p>At the end of this project, we have been able to build a model to predict the affinity of a molecule with specific CDKs or families of CDKs. Notably, we identified a potential inhibitor targeting a family of CDKs in which some (CDK2s) ensure a phase switch in the cell cycle.</p>
+    
+    <p>By preventing this transition, the inhibitor has the potential to interrupt cell division and halt uncontrolled cell proliferation, aligning perfectly with the objective of our investigation.</p>
+    
+    <p>Now, let's meet in the lab to experimentally test the effect of these inhibitors, potential new drugs for cancer. Who knows, this molecule might become one of the drugs in the next clinical trials against cancer!</p>
 
     <!-- Introduction -->
   
