@@ -82,3 +82,6 @@ Everyone helped with writing the datastory and ensuring that the repository was 
 |Mathilde    | Preprocessing of data, datastory writing, video |
 |Timon       | Website, datastory                              |
 
+### Datastory website
+https://epfl-ada.github.io/ada-2024-project-forzada/
+
