@@ -190,18 +190,6 @@ a:hover {
 
     <br>
 
-    <p>Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. But what exactly is cell proliferation?</p>
-
-    <p>In healthy cells, division occurs through mitosis, producing two new cells. In cancer cells, however, the division becomes abnormally fast and uncontrolled, leading to the formation of a mass of cells: the tumor.</p>
-
-    <p>Could we find a treatment to prevent the tumor? First let’s take a look at what drives normal cell division. Cells divide in a tightly regulated process known as the cell cycle. It consists of four distinct phases, each governed by specific enzymes, the cyclin-dependent kinases (CDKs). For instance, a CDK, when bound to a specific cyclin, forms an activated complex. This complex ensures the transition from a phase to another.</p>
-
-    <p>But in the case of cancers, the complex is overactivated!</p>
-
-    <p>It could be an idea to prevent this and cure cancers! Could we find an inhibitor?</p>
-
-    <p>This inhibitor could target the cyclin-dependent kinase and reduce its catalytic activity. The inactivated complex wouldn’t be able to ensure the phase switch anymore.</p>
-
     <h2>Research question</h2>
 
     <p>To find this amazing cure, it’s essential to start with applied data analysis.</p>
@@ -298,7 +286,10 @@ a:hover {
     
     <p>For the specific CDK, CDK2-G1/S-CycE1, we can see that the model is performing well. So let us now try and predict the binding affinity of a 1000 random ligands to this protein.</p>
 
-
+    <iframe 
+    src="assets/img/log_histogram.html" 
+    style="position: relative; z-index: 100000000; width: 100%; height: 100vh; border: 0; overflow: hidden;">
+    </iframe>
     
     <p>Our model seems to perform reasonably for these ligands. It predicts low values of IC50, allowing us to isolate potential strong inhibitors against the CDK.</p>
     
@@ -310,11 +301,14 @@ a:hover {
     
     <p>We use our model on several families of CDKs. In the visual representation of the results, we choose to show a specific family which is composed of a lot of CDK2 known to ensure the switch between phases G1 and S of the cell cycle.</p>
     
-    
+    <img src="assets/img/shuffledoriginal2.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
     
     <p>The models now predict the binding affinity of a ligand to a family of proteins. This is amazing! Now that the models are built, let’s predict the affinity of some random molecules from our data, to one of the families.</p>
     
-    
+    <iframe 
+    src="assets/img/2log_histogram.html" 
+    style="position: relative; z-index: 100000000; width: 100%; height: 100vh; border: 0; overflow: hidden;">
+    </iframe>
     
     <p>The prediction gives us that this CDK family will have a very high binding affinity (low IC50) with some ligands. Our model tells us it is very likely that we found a great inhibitor!</p>
     
@@ -322,7 +316,7 @@ a:hover {
     
     <p>Below are the molecular structures of the two best inhibitors targeting respectively a given family (family 1, mainly composed of CDK2 variants) and a specific CDK (CDK2-G1/S-CycE1), obtained with our models!</p>
     
-
+    <img src="assets/img/winners.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <h2>Conclusion</h2>
     
