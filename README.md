@@ -1,26 +1,28 @@
 # ada-2024-project-forzada
 
-## "What makes a good inhibitor against cell proliferation?" 
+## Shutting Down the Cell Cycle: Potential of CDK Inhibitors in Cancer treatment 
 
 ### Abstract:
-Cancer cells can grow quickly in the human body, but what allows them to grow, and more importantly can we inhibit this proliferation from happening? We know that cyclin-dependent kinases (CDKs) drive the cell cycle and can interact with diverse ligands. This project explores how CDKs interact with their ligands, studying their binding affinities, amino acid sequences as well as their ligand's structure. Through the analysis of comparing the CDKs and ligands based on their affinity scores, we confirmed using the Levenshtein distance that some CDKs within the same family have very similar chain1 amino acid sequences. However, for these specific families there was not sufficient data to compare the ligand and CDK pair interaction. Thus, CDKs were joined by their families (UniProt ID) to make meaningful comparisons on ligands structures (SMILES) with the Tanimoto Similarity measure. Ligands with a strong affinitity to multiple CDKs did on average have 15% similar looking molecular structures. 
 
+Globally, 1 in 6 people die from cancer. Despite their differences, all cancers share a common hallmark: uncontrolled cell proliferation. This cell division is governed by specific enzymes, the cyclin-dependent kinases (CDKs), activated when bound to specific cyclins. But in the case of cancers, the complex CDK/cyclin is overactivated ! In this project, our idea is to find a inhibitor that could target CDKs, prevent this anarchic cell division and maybe cure cancers ! 
+
+To achieve this, we sort CDKs by families based on their amino acid sequence similarities. We explore how CDKs interact with their ligands, studying their binding affinities, amino acid sequences as well as their ligand's structure. From these analysis, we build a model to predict the affinity of a molecule with specific CDKs or families of CDKs. 
+
+From this model, we are able to find potential inhibitors targeting a family of CDKs or a specific CDK. These inhibitors by interrupting the cell division, can stop an uncontrolled cell proliferation, and prevent the development of cancers! 
 
 ### Research Questions we want to answer
 
-- What are the similarities between CDK and ligands?
-     - Does a group of ligands have strong binding affinities across multiple CDKs? This will reveal plausible good inhibitors.
-     - Using a similarity measure such as Tanimoto, how much information are we disregarding by this method? 
-- Are there similarities in the amino acid sequences that explain these similarities between CDKs and ligands?
-- Are these similarities based on patterns in the amino acid sequences or ligand structures?
-- (Future) Can we make a regression model (QSAR) to predict the potential binding affinity between CDK proteins and ligands (or for any random protein).
-- (more to come)
+**Main question**
+- Could we find potential inhibitors of CDKs?
 
-In general, the subset containing only CDK's is not sufficient data and we expect to have to expand these method onto multiple target families.
+**Derived questions**
+- Do CDKs have similarities that could allow us to classify them into families?
+- How do the CDKs interact with their ligands?
+- Do CDKs of the same family have a similar interaction profile with their ligands?
+- Do the ligands with high affinity for a CDK share common structural features?
+- Can we design a model to predict the affinity of a given molecule with a specific CDK or family of CDKs? 
 
-### Proposed additional dataset
-* PDP viewer as a potential additional dataset for P3. *We don't yet use this dataset, because we think it might be a very manual process and maybe too much focusing on a life science approach and not a data analysist approach.*
-  
+
 ### Methods
 
 **String matching methods**:
@@ -28,15 +30,20 @@ In general, the subset containing only CDK's is not sufficient data and we expec
 To gain insight into the similarities and differences between various CDK amino acid sequences, we will use string-based similarity measures. We plan to use
 - Levenshtein distance measure. Which matches and measures the characters that are different in two given sequences. We can explain this in a confusion matrix of the unique CDKs and gain insight on similar CDKs.
 
+
 **Pattern matching methods**:
 
 To deepen our analysis we also want to utilize pattern matching methods to explore patterns in the CDK sequences and Ligand structures. 
-- Tanimoto (for the SMILES). We use this for the ligand structures to compare the similarities. 
-- N-grams (not implemented yet). We plan to use this on the CDK sequences to potentially locate the binding site pattern that enables the inhibiting in the CDK-ligand pair. Using n-grams will allow us to look at sequences of characters in the amino acid sequences of the CDKs. We can experiment with different values. 
+- Tanimoto (for the SMILES). We use this for the ligand structures to compare the similarities.
+- Morgan Fingerprint. Using the rd2kit we can obtain the Morgan fingerprint for a molecule. This is a way to vectorize the molecules so that we can feed it as input to a model.
+
 
 **Prediction methods**:
 
-- Using the QSAR method based on Tanimoto Similarity Coefficient as a variable (not implemented yet).
+- Using the QSAR method based on Tanimoto Similarity Coefficient as a variable.
+- Using PCA to reduce dimensionality after using the Morgan Fingerprint to obtain a vectorized format of the molecule (SMILES)
+- Evaluating using R2 scores and RMSE.
+- Comparing the model against a random prediction model using shuffling technique. This will evaluate whether our model is better than a random model since to our knowledge there are no available, existing models made for CDK with ligands affinity scores.
 
 
 
@@ -48,21 +55,30 @@ To deepen our analysis we also want to utilize pattern matching methods to explo
 | **Visualization**       | Create heatmaps for affinity scores              | Before P2      |
 | **Sequence Embedding**  | Encode sequences for similarity measurement      | (Week 1)       |
 | **QSAR Modeling**       | Try to build regression model for affinity prediction   | Weeks 1-3      |
+| **CDK families**        | Group the CDKs into families                     | Week 4         |
 | **Final Analysis**      | Interpret results                                | Week 4         |
-| **Hand-in**             | Finalize README and datastory                    | Week 5         |
+| **Hand-in**             | Finalize README and datastory + explanatory video    | Week 5         |
 
 
 
 ### Organization within the team
 Internal milestones for milestone P3: 
-* **[Done]** Data exploration: clean data, handle outliers, normalise, drop redundant information
-* **[Done]** Visualisation: visualise groups of CDK's and ligands to decide which deserve deeper exploration
-* **[Partially done]**: Sequence Embedding: Using the Levenshtein distance and Tanimoto measure to compare the sequences of the CDKs and the ligand structures. We need to extend this to use N-grams so that we can find potential patterns that strongly inhibits binding affinity.
-* Prediction method done if possible.
+* Data exploration: clean data, handle outliers, normalise, drop redundant information
+* Visualisation: visualise groups of CDK's and ligands to decide which deserve deeper exploration
+* Sequence Embedding: Using the Levenshtein distance and Tanimoto measure to compare the sequences of the CDKs and the ligand structures. Additionally use the Morgan Fingerprint
+* Prediction method using QSAR. Dimensionality reduction using PCA.
+* Analysing the output of the prediction
+
+### Group member contributions
+
+Everyone helped with writing the datastory and ensuring that the repository was up to date.
 
 
-### Questions for TAs (optional)
+| Member     | Main tasks                                      |
+|------------|-------------------------------------------------|
+|Johanne     | QSAR model, similarity measures, final predictions|
+|Julie       | Datastory writing, video, CDK family analysis   |
+|Mathias     | QSAR, Tanimoto, final predictions               |
+|Mathilde    | Preprocessing of data, datastory writing, video |
+|Timon       | Website, datastory                              |
 
-How much data should we use? We feel we need to upscale and use more of the data, but we limited ourselves to only use the CDKs for this milestone. We think it could be interesting to use all (or at least more) of the data e.g. to cluster based on how targets interact with ligands (we would expect to find the CDK families).
-
-We are unsure of how we should build a prediction model and if this will work.
