@@ -209,7 +209,7 @@ a:hover {
   
     <br>
 
-    <img src="assets/img/ligandcdknetworkgraph.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+    <img src="iter2/firstpicca.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <p>We can visualize all the CDKs as blue spheres and the ligands they interact with as orange dots. The grey lines connecting them indicate the availability of affinity measurements for each molecule pair. The more connections a particular CDK has, the larger the size of its corresponding blue sphere. From this plot, it is evident that our data is heterogeneous: we have abundant information for some CDKs, while considerably less is available for others.</p>
     <p>Let’s study these interactions and let’s find a cure for cancer!</p>
@@ -228,7 +228,7 @@ a:hover {
 
     <br>
 
-    <img src="assets/img/heatmapjulie.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+    <img src="iter2/julieheatmap.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <br>
 
@@ -237,7 +237,7 @@ a:hover {
     <br>
 
     <iframe 
-    src="assets/img/interactive_pca_plot_cool_colors.html" 
+    src="iter2/PCA_CDK_families.html
     style="position: relative; z-index: 100000000; width: 100%; height: 100vh; border: 0; overflow: hidden;">
     </iframe>
     </div>
@@ -256,7 +256,7 @@ a:hover {
     
     <br>
 
-    <img src="assets/img/heatmap.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+    <img src="iter2/heatmap2.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <br>
 
@@ -266,7 +266,7 @@ a:hover {
   
     <br>
     
-    <img src="assets/img/heatmap2cdks.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+    <img src="iter2/extraheatmap.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
     
     <br>
 
@@ -276,6 +276,8 @@ a:hover {
     </div>
 
     <div id="smiles" class="content-section">
+    <h1>Could the SMILES make us smile?</h1>
+
     <p>The only information we have on the ligands' nature is their SMILES giving structural information about the molecule. We aim to determine whether ligands with high affinity for a CDK share common structural features. Identifying such patterns would significantly advance our progress in developing an effective inhibitor.</p>
     
     <p>To investigate similarities between SMILES's ligands, we compare their Tanimoto similarity coefficients.You will find more about Tanimoto following this <a href="https://www.rdkit.org/docs/GettingStartedInPython.html" target="_blank" style="color: #007bff; text-decoration: underline;">this link</a>. Here are two plots showing the SMILES similarities between ligands that bind strongly to CDK2.</p>
@@ -283,8 +285,8 @@ a:hover {
     <br>
 
     <div style="display: flex; justify-content: center; gap: 20px;">
-      <img src="assets/img/tanimoto1.png" alt="Tanimoto Similarity 1" style="width: 50%; height: auto;">
-      <img src="assets/img/tanimotothreshold.png" alt="Tanimoto Threshold" style="width: 50%; height: auto;">
+      <img src="iter2/tani1.png" alt="Tanimoto Similarity 1" style="width: 50%; height: auto;">
+      <img src="iter2/tani2.png" alt="Tanimoto Threshold" style="width: 50%; height: auto;">
     </div>
     
     <br>
@@ -306,7 +308,7 @@ a:hover {
 
     <br>
 
-    <img src="assets/img/comparisonshuffledvsnormal.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+    <img src="iter2/shufflemodel1.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
     
     <br>
 
@@ -314,7 +316,7 @@ a:hover {
     
     <br>
 
-    <img src="assets/img/r2andrmse.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+    <img src="iter2/rmse.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
 
     <p>As we can see the different models show a good potential for predicting the binding affinity of a ligand!</p>
 
@@ -323,7 +325,7 @@ a:hover {
     <p>For the specific CDK, CDK2-G1/S-CycE1, we can see that the model is performing well. So let us now try and predict the binding affinity of a 1000 random ligands to this protein.</p>
 
     <iframe 
-    src="assets/img/log_histogram.html" 
+    src="iter2/histogram_log1.html" 
     style="position: relative; z-index: 100000000; width: 100%; height: 100vh; border: 0; overflow: hidden;">
     </iframe>
     
@@ -339,13 +341,13 @@ a:hover {
     
     <p>We use our model on several families of CDKs. In the visual representation of the results, we choose to show a specific family which is composed of a lot of CDK2 known to ensure the switch between phases G1 and S of the cell cycle.</p>
     
-    <img src="assets/img/shuffledoriginal2.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+    <img src="iter2/shufflemodel2.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
     
     <p>The models now predict the binding affinity of a ligand to a family of proteins. This is amazing! 
       Now that the models are built, let’s predict the affinity of some random molecules from our data, to one of the families.</p>
           
     <iframe 
-    src="assets/img/2log_histogram.html" 
+    src="iter2/histogram_log2.html" 
     style="position: relative; z-index: 100000000; width: 100%; height: 100vh; border: 0; overflow: hidden;">
     </iframe>
     
@@ -355,7 +357,7 @@ a:hover {
     
     <p>Below are the molecular structures of the two best inhibitors targeting respectively a given family (family 1, mainly composed of CDK2 variants) and a specific CDK (CDK2-G1/S-CycE1), obtained with our models! </p>
     
-    <img src="assets/img/winners.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
+    <img src="iter2/winners.png" alt="cancercellsimg" class="centered-img" width="80%" height="auto">
     </div>
     </div>
 
