@@ -142,6 +142,15 @@ a:hover {
   border-radius: 8px;
 }
 
+.subtitle-container {
+  text-align: center;
+  padding: 15px 0;
+  margin-bottom: 15px;
+  background-color: #EECEC1; /* Light background color */
+  color: #5F494E; /* Dark text for good contrast */
+  border-radius: 8px;
+}
+
 .title-container h1 {
   margin: 0;
   font-size: 2.2rem;
@@ -217,7 +226,8 @@ a:hover {
     </div>
 
     <div id="sortfamilies" class="content-section">
-    <h1>CDKs: Can we sort them by families?</h1>
+    <div class="subtitle-container">
+    <h1>CDKs: Can we sort them by families?</h1></div>
 
     <p>To find potential inhibitors of CDKs functions, we first need to know more about these kinases. In our database, we have 30 different CDKs and for each, the amino-acid sequences of their chains. Are they all different enough that every potential ligand would bind differently to each CDK? Or do they have similarities that could allow us to classify them into families? Indeed, we can imagine that CDKs with similar sequences would have a similar interaction profile with their ligands. Admitting this hypothesis, we could conclude that ligands having a strong interaction with a given CDK would also have a significant interaction with CDKs of the same family.</p>
 
@@ -235,21 +245,18 @@ a:hover {
 
     <p>From this plot and using these similarity results, could we sort the CDKs into families?</p>
 
-    <br>
-
     <iframe 
     src="iter2/PCA_CDK_families.html"
     style="position: relative; z-index: 100000000; width: 100%; height: 100vh; border: 0; overflow: hidden;">
     </iframe>
     </div>
 
-    <br>
-
     <p>We obtain 5 families of CDKs that we can now use to study the CDKs-Ligands interaction!</p>
 
 
     <div id="ligands" class="content-section">
-    <h1>How do the CDKs bind to their ligands?</h1>
+    <div class="subtitle-container">
+    <h1>How do the CDKs bind to their ligands?</h1></div>
     
     <p>By studying the interactions between ligands and CDKs, we are interested in finding ligands inhibiting the CDKs strongly. </p>
     
@@ -277,7 +284,8 @@ a:hover {
     </div>
 
     <div id="smiles" class="content-section">
-    <h1>Could the SMILES make us smile?</h1>
+    <div class="subtitle-container">
+    <h1>Could the SMILES make us smile?</h1></div>
 
     <p>The only information we have on the ligands' nature is their SMILES giving structural information about the molecule. We aim to determine whether ligands with high affinity for a CDK share common structural features. Identifying such patterns would significantly advance our progress in developing an effective inhibitor.</p>
     
@@ -298,10 +306,12 @@ a:hover {
     </div>
 
     <div id="predictionmodel" class="content-section">
-    <h1>CDKs/ligands affinity: designing a prediction model</h1>
+    <div class="subtitle-container">
+    <h1>CDKs/ligands affinity: designing a prediction model</h1></div>
 
     <p>In order to find a potential inhibitor for the CDKs, we want to build a prediction model which would give us the affinity of an input molecule with a given CDK. For this purpose we construct a QSAR model based on linear regression. In short the model takes the SMILES of a ligand, vectorizes it and makes use of these vectorizations as features (X) with the dependent variable being the IC50 values (Y).</p>
-    
+    </div>
+
     <div id="singlemodel" class="content-section">
     <h2>Single Protein Model</h2>
 
@@ -363,9 +373,10 @@ a:hover {
     </div>
 
     <br>
-
+    
     <div id="conclusion" class="content-section">
-    <h1>Conclusion</h1>
+    <div class="subtitle-container">
+    <h1>Conclusion</h1></div>
     
     <p>At the end of this project, we have been able to build a model to predict the affinity of a molecule with specific CDKs or families of CDKs. Notably, we identified a potential inhibitor targeting a family of CDKs in which some (CDK2s) ensure a phase switch in the cell cycle. 
       By preventing this transition, the inhibitor has the potential to interrupt cell division and halt uncontrolled cell proliferation, aligning perfectly with the objective of our investigation.</p>
